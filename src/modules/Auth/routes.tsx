@@ -1,5 +1,10 @@
 import buildRouteTree from 'build-route-tree';
 
 export const routes = buildRouteTree({
-  signUp: null,
+  auth: {
+    restore: null,
+    signIn: null,
+    signUp: null,
+    account: null,
+  },
 });

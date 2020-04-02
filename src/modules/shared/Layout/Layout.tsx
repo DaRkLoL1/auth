@@ -30,10 +30,10 @@ const Layout = (props: any) => {
     ];
 
     const routePaths = [
-      routes.account.getRoutePath(),
-      routes.signIn.getRoutePath(),
-      routes.signUp.getRoutePath(),
-      routes.restore.getRoutePath(),
+      routes.auth.account.getRoutePath(),
+      routes.auth.signIn.getRoutePath(),
+      routes.auth.signUp.getRoutePath(),
+      routes.auth.restore.getRoutePath(),
     ];
 
     return (

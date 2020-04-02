@@ -53,10 +53,17 @@
 
   &__restore {
     padding: 2px 0;
+    outline: none;
+    border: none;
+    background-color: transparent;
     color: #5867dd;
-    text-decoration: none;
     font-size: 12px;
     line-height: 20px;
+    cursor: pointer;
+
+    &:focus {
+      color: black;
+    }
   }
 
   &__button {
@@ -64,9 +71,16 @@
     width: 100%;
   }
 
-  &__wrapper {
+  &__link {
     margin: 27px 0 13px;
+    outline: none;
+    border: none;
+    background-color: transparent;
+    color: #5867dd;
     text-align: center;
+    font-size: 14px;
+    line-height: 22px;
+    cursor: pointer;
 
     @media (min-width: 500px) {
       position: absolute;
@@ -74,14 +88,10 @@
       right: 25px;
       margin: 0;
     }
-  }
 
-  &__link {
-    color: #5867dd;
-    text-align: center;
-    text-decoration: none;
-    font-size: 14px;
-    line-height: 22px;
+    &:focus {
+      color: black;
+    }
   }
 
   &__text {

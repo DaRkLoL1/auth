@@ -1,4 +1,4 @@
-.account {
+.account-form {
   padding-top: 70px;
   padding-bottom: 44px;
 
@@ -26,6 +26,7 @@
 
   &__exit {
     margin: 27px 0 13px;
+    outline: none;
     border: none;
     background-color: transparent;
     color: #5867dd;
@@ -39,6 +40,10 @@
       top: 20px;
       right: 25px;
       margin: 0;
+    }
+
+    &:focus {
+      color: black;
     }
   }
 }

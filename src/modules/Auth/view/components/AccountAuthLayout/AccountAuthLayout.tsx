@@ -10,17 +10,17 @@ interface IFeatureProps {
 
 type IProps = IFeatureProps;
 
-function AccountLayoutComponent(props: IProps) {
+function AccountAuthLayoutComponent(props: IProps) {
   const { authorizationFeatureEntry: { containers } } = props;
-  const { Authorization } = containers;
+  const { Account } = containers;
   return (
     <Layout>
-      <Authorization type="account" />
+      <Account />
     </Layout>
   );
 }
-const AccountLayout = withAsyncFeatures({
+const AccountAuthLayout = withAsyncFeatures({
   authorizationFeatureEntry: features.authorization.loadEntry,
-})(AccountLayoutComponent);
+})(AccountAuthLayoutComponent);
 
-export { AccountLayout, AccountLayoutComponent, IProps as ISignInLayoutProps };
+export { AccountAuthLayout, AccountAuthLayoutComponent, IProps as IAccountLayoutProps };

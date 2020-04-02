@@ -4,7 +4,7 @@ import block from 'bem-cn';
 import { TextField } from '../TextField/TextField';
 import { Button } from '../Button/Button';
 
-import './Account.scss';
+import './AccountForm.scss';
 
 interface IProps {
   user: null | {email: string};
@@ -12,9 +12,9 @@ interface IProps {
   handleSignOut: () => void;
 }
 
-const b = block('account');
+const b = block('account-form');
 
-function Account(props: IProps) {
+function AccountForm(props: IProps) {
   const [password, setPassword] = useState('');
 
   const { user, handleResetPassword, handleSignOut } = props;
@@ -34,7 +34,7 @@ function Account(props: IProps) {
         <div className={b('button')}>
           <Button text="Изменить пароль" />
         </div>
-        <button className={b('exit')} type="button" onClick={() => { handleSignOut(); }}>Выйти &rarr;</button>
+        <button className={b('exit')} type="button" onClick={() => handleSignOut()}>Выйти &rarr;</button>
       </>
     );
   }
@@ -51,4 +51,4 @@ function Account(props: IProps) {
   );
 }
 
-export { Account };
+export { AccountForm };

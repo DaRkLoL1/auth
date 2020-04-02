@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 import block from 'bem-cn';
 
 import { TextField } from '../TextField/TextField';
@@ -11,8 +10,8 @@ const b = block('authorization-form');
 
 interface IProps {
   type: string;
-  path: string;
-  restorePath?: string;
+  path: () => void;
+  restorePath?: () => void;
   onClick: (email: string, password: string) => void;
 }
 
@@ -23,7 +22,7 @@ function AuthorizationForm(props: IProps) {
 
   let title = 'Войти';
   let titleButton = 'Войти';
-  let titleLink = 'Войти ';
+  let titleRedirect = 'Войти ';
 
   if (type === 'signUp') {
     title = 'Регистрация';
@@ -31,7 +30,7 @@ function AuthorizationForm(props: IProps) {
   }
 
   if (type === 'signIn') {
-    titleLink = 'Зарегистрироваться ';
+    titleRedirect = 'Зарегистрироваться ';
   }
 
   if (type === 'restore') {
@@ -77,18 +76,16 @@ function AuthorizationForm(props: IProps) {
       )}
 
       {type === 'signIn' && restorePath && (
-        <Link to={restorePath} className={b('restore')}>Восстановить пароль</Link>
+        <button className={b('restore')} type="button" onClick={() => restorePath()}>Восстановить пароль</button>
       )}
 
       <div className={b('button')}>
         <Button text={titleButton} />
       </div>
-      <div className={b('wrapper')}>
-        <Link to={path} className={b('link')}>
-          {titleLink}
-          &rarr;
-        </Link>
-      </div>
+      <button className={b('link')} type="button" onClick={() => path()}>
+        {titleRedirect}
+        &rarr;
+      </button>
       {type === 'signUp' && (
         <>
           <p className={b('text')}>
