@@ -1,7 +1,11 @@
-import { routes as searchRoutes } from './Search/routes';
-import { routes as profileRoutes } from './Profile/routes';
+import { routes as signInRoutes } from './SignIn/routes';
+import { routes as signUpRoutes } from './SignUp/routes';
+import { routes as accountRoutes } from './Account/routes';
+import { routes as restoreRoutes } from './Restore/routes';
 
 export const routes = {
-  ...searchRoutes,
-  ...profileRoutes,
+  ...signInRoutes,
+  ...signUpRoutes,
+  ...accountRoutes,
+  ...restoreRoutes,
 };

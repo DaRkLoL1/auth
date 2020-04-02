@@ -40,9 +40,7 @@ export interface IAppReduxState {
   theme: ThemeProviderNS.IReduxState;
   notification: NotificationNamespace.IReduxState;
   // features
-  usersSearch: features.usersSearch.namespace.IReduxState;
-  repositoriesSearch: features.repositoriesSearch.namespace.IReduxState;
-  profile: features.profile.namespace.IReduxState;
+  authorization: features.authorization.namespace.IReduxState;
 }
 
 export type RootSaga = (deps: IDependencies) => () => SagaIterator;

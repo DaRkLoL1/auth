@@ -1,0 +1,44 @@
+.account {
+  padding-top: 70px;
+  padding-bottom: 44px;
+
+  &__title {
+    text-align: center;
+  }
+
+  &__title-input {
+    margin-top: 16px;
+    padding-right: 11px;
+    padding-left: 11px;
+    color: #3c485e;
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  &__input {
+    padding-bottom: 11px;
+  }
+
+  &__button {
+    margin: 35px auto 14px;
+    width: 100%;
+  }
+
+  &__exit {
+    margin: 27px 0 13px;
+    border: none;
+    background-color: transparent;
+    color: #5867dd;
+    text-align: center;
+    font-size: 14px;
+    line-height: 22px;
+    cursor: pointer;
+
+    @media (min-width: 500px) {
+      position: absolute;
+      top: 20px;
+      right: 25px;
+      margin: 0;
+    }
+  }
+}
