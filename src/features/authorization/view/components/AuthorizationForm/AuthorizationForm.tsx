@@ -39,7 +39,7 @@ function AuthorizationForm(props: IProps) {
   }
 
   return (
-    <form className={b()} onSubmit={() => onClick(email, password)}>
+    <form className={b()} onSubmit={onSubmit}>
       <h1 className={b('title')}>{title}</h1>
 
       {type === 'restore' && (
@@ -108,6 +108,11 @@ function AuthorizationForm(props: IProps) {
 
     </form>
   );
+
+  function onSubmit(event: any) {
+    event.preventDefault();
+    onClick(email, password);
+  }
 
   function changeEmail(event: any) {
     setEmail(event.target.value);
