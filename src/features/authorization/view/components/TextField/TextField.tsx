@@ -14,7 +14,13 @@ interface IProps {
 function TextField(props: IProps) {
   const { type, value, onChange } = props;
   return (
-    <input className={b()} type={type} value={value} onChange={(event: any) => onChange(event)} />
+    <input
+      required
+      className={b()}
+      type={type}
+      value={value}
+      onChange={(event: any) => onChange(event)} 
+    />
   );
 }
 

@@ -1,6 +1,21 @@
 .authorization-form {
+  position: relative;
   padding-top: 70px;
   padding-bottom: 44px;
+  width: 100%;
+
+  &__wrapper {
+    margin: 0 auto;
+    width: 55%;
+
+    @media (max-width: 500px) {
+      width: 85%;
+    }
+
+    @media (max-width: 700px) {
+      width: 75%;
+    }
+  }
 
   &__title {
     text-align: center;
@@ -15,6 +30,13 @@
     line-height: 22px;
   }
 
+  &__error-title {
+    color: red;
+    text-align: center;
+    font-size: 16px;
+    line-height: 24px;
+  }
+
   &__title-input {
     margin-top: 16px;
     padding-right: 11px;
@@ -26,6 +48,11 @@
 
   &__input {
     padding-bottom: 11px;
+  }
+
+  &__password-error {
+    color: red;
+    text-align: center;
   }
 
   &__lists {
