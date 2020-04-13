@@ -65,8 +65,8 @@ function* executeResetPassword({ api }: IDependencies, { payload }: NS.ISignIn) 
 function* executeRestore({ api }: IDependencies, { payload }: NS.IRestore) {
   try {
     const { email } = payload;
-    yield call(api.restore, email);
-    yield put(actionCreators.restoreSuccess(null));
+    const response = yield call(api.restore, email);
+    yield put(actionCreators.restoreSuccess(response));
   } catch (error) {
     yield put(actionCreators.restoreFail(error));
   }

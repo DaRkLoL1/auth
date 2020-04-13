@@ -1,14 +1,15 @@
 import React from 'react';
 import { autobind } from 'core-decorators';
 import { connect } from 'react-redux';
+
 import { IAppReduxState } from 'shared/types/app';
 
-import { AccountForm } from '../../components/index';
 import { actionCreators, selectors } from './../../../redux';
+import { AccountForm } from '../../components/index';
 
 function mapState(state: IAppReduxState) {
   return {
-    user: selectors.selectProfile(state),
+    user: selectors.selectUser(state),
   };
 }
 

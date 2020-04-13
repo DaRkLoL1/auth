@@ -58,7 +58,7 @@ const Layout = (props: any) => {
         </nav>
       </header>
       <main className={b('content')}>
-        <div className={b('wrapper')}>
+        <div className={b('form')}>
           {children}
         </div>
       </main>

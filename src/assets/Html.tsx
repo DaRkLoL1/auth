@@ -62,7 +62,6 @@ class Html extends React.PureComponent<IHtmlProps> {
             {/* Other code */}
             {head && head.script && head.script.toComponent()}
           </div>
-
           {/* App code and 3d party services code */}
           <div>
             <script dangerouslySetInnerHTML={{ __html: `window.__data=${serialize(state)};` }} charSet="UTF-8" />

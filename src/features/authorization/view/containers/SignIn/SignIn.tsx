@@ -2,10 +2,12 @@ import React from 'react';
 import { autobind } from 'core-decorators';
 import { connect } from 'react-redux';
 
-import { AuthorizationForm } from '../../components/index';
-import { actionCreators } from './../../../redux';
+import { IAppReduxState } from 'shared/types/app';
 
-interface IProps {
+import { AuthorizationForm } from '../../components/index';
+import { actionCreators, selectors } from './../../../redux';
+
+interface IOwnProps {
   path: () => void;
   restorePath: () => void;
   signInUser: (object: {email: string, password: string}) => void;
@@ -15,14 +17,37 @@ const mapDispatch = {
   signInUser: actionCreators.signInUser,
 };
 
+interface IStateProps {
+  error: string | {code: string};
+}
+
+function mapState(state: IAppReduxState): IStateProps {
+  return {
+    error: selectors.selectCommunication(state, 'signInUser').error,
+  };
+}
+
+type IProps = IOwnProps & IStateProps;
+
 @autobind
 class SignInComponent extends React.Component<IProps> {
   public render() {
-    const { path, restorePath } = this.props;
+    const { path, restorePath, error } = this.props;
+
+    let errorMessage: string = '';
+    if (typeof error === 'object') {
+      if (error.code === 'auth/wrong-password') {
+        errorMessage = 'Пароль недействителен или у пользователя нет пароля';
+      } else if (error.code === 'auth/user-not-found') {
+        errorMessage = 'Нет никакой записи пользователя, соответствующей этому идентификатору. Возможно, пользователь был удален';
+      }
+    }
+
     return (
       <AuthorizationForm
         type="signIn"
         path={path}
+        errorMessage={errorMessage}
         restorePath={restorePath}
         onClick={this.handleSignIn}
       />
@@ -35,6 +60,6 @@ class SignInComponent extends React.Component<IProps> {
   }
 }
 
-const SignIn = connect(null, mapDispatch)(SignInComponent);
+const SignIn = connect(mapState, mapDispatch)(SignInComponent);
 
 export { SignIn, SignInComponent, IProps as ISignInProps };

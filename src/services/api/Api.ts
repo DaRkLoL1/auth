@@ -28,8 +28,9 @@ class Api {
     if (user) await user.updatePassword(password);
   }
 
-  public async restore(email: string) {
-    await firebase.auth().sendPasswordResetEmail(email);
+  public async restore(email: string): Promise<any> {
+    const response = await firebase.auth().sendPasswordResetEmail(email);
+    return response;
   }
 }
 

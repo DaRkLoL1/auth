@@ -1,7 +1,14 @@
-import { IAction, IPlainFailAction, IPlainAction } from 'shared/types/redux';
+import { ICommunication, IAction, IPlainFailAction, IPlainAction } from 'shared/types/redux';
 
 export interface IReduxState {
   user: null | {};
+  communication: {
+    signInUser: ICommunication;
+    signUpUser: ICommunication;
+    signOutUser: ICommunication;
+    resetPassword: ICommunication;
+    restore: ICommunication;
+  };
 }
 
 export type ISignIn = IAction<'AUTHORIZATION:SIGN_IN_USER', {email: string, password: string} >;
