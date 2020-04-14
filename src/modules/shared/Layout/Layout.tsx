@@ -16,34 +16,31 @@ const Layout = (props: IProps) => {
     const linkTitles = [
       {
         title: 'Account',
+        href: routes.auth.account.getRoutePath(),
         id: 1,
       },
       {
         title: 'Sign In',
+        href: routes.auth.signIn.getRoutePath(),
         id: 2,
       },
       {
         title: 'Sign Up',
+        href: routes.auth.signUp.getRoutePath(),
         id: 3,
       },
       {
         title: 'Restore',
+        href: routes.auth.restore.getRoutePath(),
         id: 4,
       },
     ];
 
-    const routePaths = [
-      routes.auth.account.getRoutePath(),
-      routes.auth.signIn.getRoutePath(),
-      routes.auth.signUp.getRoutePath(),
-      routes.auth.restore.getRoutePath(),
-    ];
-
     return (
       <>
-        {linkTitles.map((link, index) => (
+        {linkTitles.map(link => (
           <li className={b('item')} key={link.id}>
-            <Link className={b('link')} to={routePaths[index]}>{link.title}</Link>
+            <Link className={b('link')} to={link.href}>{link.title}</Link>
           </li>
         ))}
       </>
