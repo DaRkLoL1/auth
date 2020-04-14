@@ -1,4 +1,4 @@
-export { RestoreAuthLayout } from './RestoreAuthLayout/RestoreAuthLayout';
-export { SignInAuthLayout } from './SignInAuthLayout/SignInAuthLayout';
-export { SignUpAuthLayout } from './SignUpAuthLayout/SignUpAuthLayout';
-export { AccountAuthLayout } from './AccountAuthLayout/AccountAuthLayout';
+export { RestoreLayout } from './RestoreLayout/RestoreLayout';
+export { SignInLayout } from './SignInLayout/SignInLayout';
+export { SignUpLayout } from './SignUpLayout/SignUpLayout';
+export { AccountLayout } from './AccountLayout/AccountLayout';

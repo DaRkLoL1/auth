@@ -4,6 +4,7 @@ import { History } from 'history';
 import * as features from 'features';
 
 import { Layout } from '../../../../shared/Layout/Layout';
+import { routes } from '../../../routes';
 
 interface IFeatureProps {
   authorizationFeatureEntry: features.authorization.Entry;
@@ -12,17 +13,24 @@ interface IFeatureProps {
 
 type IProps = IFeatureProps;
 
-function AccountAuthLayoutComponent(props: IProps) {
+function SignUpLayoutComponent(props: IProps) {
   const { authorizationFeatureEntry: { containers } } = props;
-  const { Account } = containers;
+  const { SignUp } = containers;
+
   return (
     <Layout>
-      <Account />
+      <SignUp path={redirectToSignIn} />
     </Layout>
   );
-}
-const AccountAuthLayout = withAsyncFeatures({
-  authorizationFeatureEntry: features.authorization.loadEntry,
-})(AccountAuthLayoutComponent);
 
-export { AccountAuthLayout, AccountAuthLayoutComponent, IProps as IAccountLayoutProps };
+  function redirectToSignIn() {
+    const { history } = props;
+    history.push(routes.auth.signIn.getRedirectPath());
+  }
+}
+
+const SignUpLayout = withAsyncFeatures({
+  authorizationFeatureEntry: features.authorization.loadEntry,
+})(SignUpLayoutComponent);
+
+export { SignUpLayout, SignUpLayoutComponent, IProps as ISignUpLayoutProps };
