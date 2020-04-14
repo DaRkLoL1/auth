@@ -9,7 +9,7 @@ const entry = makeFeatureEntry({
   selectors,
   reduxEntry: {
     reducers: { authorization: reducer },
-    sagas: [getSaga]
+    sagas: [getSaga],
   },
 });
 

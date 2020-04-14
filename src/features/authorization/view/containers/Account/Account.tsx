@@ -14,7 +14,7 @@ function mapState(state: IAppReduxState) {
 }
 
 interface IProps {
-  user: null | {email: string};
+  user: string;
   signOutUser: () => void;
   resetPassword: (object: {password: string}) => void;
 }

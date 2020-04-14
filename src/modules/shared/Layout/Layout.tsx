@@ -1,14 +1,17 @@
 import React from 'react';
 import block from 'bem-cn';
 import { Link } from 'react-router-dom';
-import './Layout.scss';
 
 import { routes } from '../../routes';
-
+import './Layout.scss';
 
 const b = block('layout');
 
-const Layout = (props: any) => {
+interface IProps {
+  children: React.ReactNode
+}
+
+const Layout = (props: IProps) => {
   const getLinks = () => {
     const linkTitles = [
       {

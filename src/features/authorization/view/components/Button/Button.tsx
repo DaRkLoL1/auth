@@ -6,7 +6,7 @@ import './Button.scss';
 const b = block('button');
 
 interface IProps {
-  text: String;
+  text: string;
 }
 
 function Button(props: IProps) {

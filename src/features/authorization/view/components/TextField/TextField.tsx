@@ -8,7 +8,7 @@ const b = block('text-field');
 interface IProps {
   type: string;
   value: string;
-  onChange: (event: any) => void;
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 function TextField(props: IProps) {
@@ -19,7 +19,7 @@ function TextField(props: IProps) {
       className={b()}
       type={type}
       value={value}
-      onChange={(event: any) => onChange(event)} 
+      onChange={(event: React.ChangeEvent<HTMLInputElement>) => onChange(event)}
     />
   );
 }

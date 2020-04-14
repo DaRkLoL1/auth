@@ -4,7 +4,6 @@ import { combineReducers } from 'redux';
 import * as NS from '../../namespace';
 import { initial } from '../initial';
 
-// tslint:disable:max-line-length
 export const communicationReducer = combineReducers<NS.IReduxState['communication']>({
   signInUser: makeCommunicationReducer<
   NS.ISignIn,

@@ -127,7 +127,7 @@ class AuthorizationForm extends React.Component<IProps, IState> {
   }
 
   @autobind
-  private onSubmit(event: any) {
+  private onSubmit(event: React.SyntheticEvent) {
     event.preventDefault();
     const { onClick, type } = this.props;
     const { email, password } = this.state;
@@ -146,14 +146,14 @@ class AuthorizationForm extends React.Component<IProps, IState> {
   }
 
   @autobind
-  private changeEmail(event: any) {
+  private changeEmail(event: React.ChangeEvent<HTMLInputElement>) {
     this.setState({
       email: event.target.value,
     });
   }
 
   @autobind
-  private changePassword(event: any) {
+  private changePassword(event: React.ChangeEvent<HTMLInputElement>) {
     this.setState({
       password: event.target.value,
     });

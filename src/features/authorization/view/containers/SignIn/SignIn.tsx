@@ -4,8 +4,8 @@ import { connect } from 'react-redux';
 
 import { IAppReduxState } from 'shared/types/app';
 
-import { AuthorizationForm } from '../../components/index';
 import { actionCreators, selectors } from './../../../redux';
+import { AuthorizationForm } from '../../components/index';
 
 interface IOwnProps {
   path: () => void;
