@@ -19,7 +19,7 @@ function SignUpLayoutComponent(props: IProps) {
 
   return (
     <Layout>
-      <SignUp path={redirectToSignIn} />
+      <SignUp onRedirectClick={redirectToSignIn} />
     </Layout>
   );
 
