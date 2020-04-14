@@ -50,7 +50,7 @@ function* executeSignOutUser({ api }: IDependencies) {
 function* executeSignUpUser({ api }: IDependencies, { payload }: NS.ISignIn) {
   try {
     const { email, password } = payload;
-    const response: IResponse = yield call(api.signInUser, email, password);
+    const response: IResponse = yield call(api.signUpUser, email, password);
     const { user } = response;
     yield put(actionCreators.signUpUserSuccess(user.email));
   } catch (error) {

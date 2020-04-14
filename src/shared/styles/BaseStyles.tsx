@@ -12,7 +12,7 @@ const styles = {
     body: {
       margin: 0,
       fontSize: '1rem',
-      background: '#fff',
+      background: '#f2f3f8',
     },
     'html, body, #root': {
       height: '100%',

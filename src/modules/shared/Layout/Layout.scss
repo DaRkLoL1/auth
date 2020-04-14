@@ -1,14 +1,10 @@
 .layout {
-  height: 100%;
-  background-color: #f2f3f8;
-
   &__list {
     margin: 0;
   }
 
   &__content {
     margin: 10px auto;
-    min-height: 450px;
     max-width: 620px;
     width: 75%;
     border-radius: 8px;
