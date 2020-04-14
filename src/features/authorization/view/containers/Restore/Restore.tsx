@@ -8,7 +8,7 @@ import { actionCreators, selectors } from './../../../redux';
 import { AuthorizationForm } from '../../components/index';
 
 interface IOwnProps {
-  path: () => void;
+  onRedirectClick: () => void;
   restore: (object: {email: string}) => void;
 }
 
@@ -31,7 +31,7 @@ type IProps = IOwnProps & IStateProps;
 @autobind
 class RestoreComponent extends React.Component<IProps> {
   public render() {
-    const { path, error } = this.props;
+    const { onRedirectClick, error } = this.props;
     let errorMessage: string = '';
     if (typeof error === 'object') {
       errorMessage = 'Нет никакой записи пользователя, соответствующей этому идентификатору. Возможно, пользователь был удален';
@@ -39,7 +39,7 @@ class RestoreComponent extends React.Component<IProps> {
     return (
       <AuthorizationForm
         type="restore"
-        path={path}
+        onRedirectClick={onRedirectClick}
         errorMessage={errorMessage}
         onClick={this.handleRestore}
       />

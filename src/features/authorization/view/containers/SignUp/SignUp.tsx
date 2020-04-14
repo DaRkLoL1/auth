@@ -9,7 +9,7 @@ import { AuthorizationForm } from '../../components/index';
 
 
 interface IOwnProps {
-  path: () => void;
+  onRedirectClick: () => void;
   signUpUser: (object: {email: string, password: string}) => void;
 }
 
@@ -32,7 +32,7 @@ type IProps = IOwnProps & IStateProps;
 @autobind
 class SignUpComponent extends React.Component<IProps> {
   public render() {
-    const { path, error } = this.props;
+    const { onRedirectClick, error } = this.props;
     let errorMessage: string = '';
     if (typeof error === 'object') {
       errorMessage = 'Этот email адрес уже используется на другом аккаунте';
@@ -41,7 +41,7 @@ class SignUpComponent extends React.Component<IProps> {
     return (
       <AuthorizationForm
         type="signUp"
-        path={path}
+        onRedirectClick={onRedirectClick}
         errorMessage={errorMessage}
         onClick={this.handleSignUp}
       />

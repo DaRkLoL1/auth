@@ -19,7 +19,7 @@ function RestoreLayoutComponent(props: IProps) {
 
   return (
     <Layout>
-      <Restore path={redirectToSignIn} />
+      <Restore onRedirectClick={redirectToSignIn} />
     </Layout>
   );
 

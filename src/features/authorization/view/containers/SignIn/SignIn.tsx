@@ -8,8 +8,8 @@ import { actionCreators, selectors } from './../../../redux';
 import { AuthorizationForm } from '../../components/index';
 
 interface IOwnProps {
-  path: () => void;
-  restorePath: () => void;
+  onRedirectClick: () => void;
+  onRedirectToRestoreClick: () => void;
   signInUser: (object: {email: string, password: string}) => void;
 }
 
@@ -32,7 +32,7 @@ type IProps = IOwnProps & IStateProps;
 @autobind
 class SignInComponent extends React.Component<IProps> {
   public render() {
-    const { path, restorePath, error } = this.props;
+    const { onRedirectClick, onRedirectToRestoreClick, error } = this.props;
 
     let errorMessage: string = '';
     if (typeof error === 'object') {
@@ -46,9 +46,9 @@ class SignInComponent extends React.Component<IProps> {
     return (
       <AuthorizationForm
         type="signIn"
-        path={path}
+        onRedirectClick={onRedirectClick}
         errorMessage={errorMessage}
-        restorePath={restorePath}
+        onRedirectToRestoreClick={onRedirectToRestoreClick}
         onClick={this.handleSignIn}
       />
     );

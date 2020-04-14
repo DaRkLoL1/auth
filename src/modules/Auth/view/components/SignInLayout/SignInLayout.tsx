@@ -18,7 +18,7 @@ function SignInLayoutComponent(props: IProps) {
   const { SignIn } = containers;
   return (
     <Layout>
-      <SignIn path={redirectToSignUp} restorePath={redirectToRestore} />
+      <SignIn onRedirectClick={redirectToSignUp} onRedirectToRestoreClick={redirectToRestore} />
     </Layout>
   );
 

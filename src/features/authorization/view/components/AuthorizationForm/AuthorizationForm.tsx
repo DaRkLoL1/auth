@@ -10,8 +10,8 @@ const b = block('authorization-form');
 
 interface IProps {
   type: string;
-  path: () => void;
-  restorePath?: () => void;
+  onRedirectClick: () => void;
+  onRedirectToRestoreClick?: () => void;
   onClick: (email: string, password: string) => void;
   errorMessage: string;
 }
@@ -30,7 +30,7 @@ class AuthorizationForm extends React.Component<IProps, IState> {
   };
 
   render() {
-    const { type, path, restorePath, errorMessage } = this.props;
+    const { type, onRedirectClick, onRedirectToRestoreClick, errorMessage } = this.props;
     const { email, password, passwordError } = this.state;
 
     let title = 'Войти';
@@ -92,14 +92,14 @@ class AuthorizationForm extends React.Component<IProps, IState> {
             </div>
           )}
 
-          {type === 'signIn' && restorePath && (
-            <button className={b('restore')} type="button" onClick={() => restorePath()}>Восстановить пароль</button>
+          {type === 'signIn' && onRedirectToRestoreClick && (
+            <button className={b('restore')} type="button" onClick={() => onRedirectToRestoreClick()}>Восстановить пароль</button>
           )}
 
           <div className={b('button')}>
             <Button text={titleButton} />
           </div>
-          <button className={b('link')} type="button" onClick={() => path()}>
+          <button className={b('link')} type="button" onClick={() => onRedirectClick()}>
             {titleRedirect}
           </button>
           {type === 'signUp' && (
