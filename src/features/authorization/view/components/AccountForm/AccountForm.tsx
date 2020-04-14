@@ -7,7 +7,7 @@ import { Button } from '../Button/Button';
 import './AccountForm.scss';
 
 interface IProps {
-  user: null | {email: string};
+  user: string;
   handleResetPassword: (password: string) => void;
   handleSignOut: () => void;
 }
@@ -35,7 +35,7 @@ class AccountForm extends React.Component<IProps, IState> {
           <h2 className={b('title')}>
             Вы вошли как
             {' '}
-            {user.email}
+            {user}
           </h2>
           <h2 className={b('title-input')}>Пароль</h2>
           {passwordError && <p className={b('password-error')}>Пароль не соответствует требованиям</p>}
@@ -61,7 +61,7 @@ class AccountForm extends React.Component<IProps, IState> {
   }
 
   @autobind
-  private onSybmit(event: any) {
+  private onSybmit(event: React.SyntheticEvent) {
     event.preventDefault();
 
     const { handleResetPassword } = this.props;
@@ -79,7 +79,7 @@ class AccountForm extends React.Component<IProps, IState> {
   }
 
   @autobind
-  private handleChangePassword(event: any) {
+  private handleChangePassword(event: React.ChangeEvent<HTMLInputElement>) {
     this.setState({
       password: event.target.value,
     });

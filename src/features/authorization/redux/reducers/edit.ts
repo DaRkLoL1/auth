@@ -7,7 +7,7 @@ function authorizationReducer(state: NS.IReduxState['user'] = initial.user, acti
       return action.payload;
     }
     case 'AUTHORIZATION:SIGN_OUT_USER_SUCCESS': {
-      return null;
+      return '';
     }
     case 'AUTHORIZATION:SIGN_UP_USER_SUCCESS': {
       return action.payload;

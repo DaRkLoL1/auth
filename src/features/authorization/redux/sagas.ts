@@ -1,9 +1,14 @@
 import { SagaIterator } from 'redux-saga';
 import { put, call, takeLatest } from 'redux-saga/effects';
+
 import { IDependencies } from 'shared/types/app';
 
 import * as NS from '../namespace';
 import * as actionCreators from './actionCreators';
+
+interface IResponse {
+  user: {email: string}
+}
 
 function getSaga(deps: IDependencies) {
   const signInUserType: NS.ISignIn['type'] = 'AUTHORIZATION:SIGN_IN_USER';
@@ -21,12 +26,13 @@ function getSaga(deps: IDependencies) {
   };
 }
 
+
 function* executeSignInUser({ api }: IDependencies, { payload }: NS.ISignIn) {
   try {
     const { email, password } = payload;
-    const searchUsersResults: any = yield call(api.signInUser, email, password);
-    const { user } = searchUsersResults;
-    yield put(actionCreators.signInUserSuccess(user));
+    const response: IResponse = yield call(api.signInUser, email, password);
+    const { user } = response;
+    yield put(actionCreators.signInUserSuccess(user.email));
   } catch (error) {
     yield put(actionCreators.signInUserFail(error));
   }
@@ -35,7 +41,7 @@ function* executeSignInUser({ api }: IDependencies, { payload }: NS.ISignIn) {
 function* executeSignOutUser({ api }: IDependencies) {
   try {
     yield call(api.signOutUser);
-    yield put(actionCreators.signOutUserSuccess(null));
+    yield put(actionCreators.signOutUserSuccess());
   } catch (error) {
     yield put(actionCreators.signOutUserFail(error));
   }
@@ -44,9 +50,9 @@ function* executeSignOutUser({ api }: IDependencies) {
 function* executeSignUpUser({ api }: IDependencies, { payload }: NS.ISignIn) {
   try {
     const { email, password } = payload;
-    const searchUsersResults: any = yield call(api.signUpUser, email, password);
-    const { user } = searchUsersResults;
-    yield put(actionCreators.signUpUserSuccess(user));
+    const response: IResponse = yield call(api.signInUser, email, password);
+    const { user } = response;
+    yield put(actionCreators.signUpUserSuccess(user.email));
   } catch (error) {
     yield put(actionCreators.signUpUserFail(error));
   }
@@ -56,7 +62,7 @@ function* executeResetPassword({ api }: IDependencies, { payload }: NS.ISignIn) 
   try {
     const { password } = payload;
     yield call(api.resetPassword, password);
-    yield put(actionCreators.resetPasswordSuccess(null));
+    yield put(actionCreators.resetPasswordSuccess());
   } catch (error) {
     yield put(actionCreators.resetPasswordFail(error));
   }
@@ -65,8 +71,8 @@ function* executeResetPassword({ api }: IDependencies, { payload }: NS.ISignIn) 
 function* executeRestore({ api }: IDependencies, { payload }: NS.IRestore) {
   try {
     const { email } = payload;
-    const response = yield call(api.restore, email);
-    yield put(actionCreators.restoreSuccess(response));
+    yield call(api.restore, email);
+    yield put(actionCreators.restoreSuccess());
   } catch (error) {
     yield put(actionCreators.restoreFail(error));
   }
