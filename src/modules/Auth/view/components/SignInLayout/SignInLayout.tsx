@@ -13,24 +13,28 @@ interface IFeatureProps {
 
 type IProps = IFeatureProps;
 
-function SignUpAuthLayoutComponent(props: IProps) {
+function SignInLayoutComponent(props: IProps) {
   const { authorizationFeatureEntry: { containers } } = props;
-  const { SignUp } = containers;
-
+  const { SignIn } = containers;
   return (
     <Layout>
-      <SignUp path={redirectToSignIn} />
+      <SignIn path={redirectToSignUp} restorePath={redirectToRestore} />
     </Layout>
   );
 
-  function redirectToSignIn() {
+  function redirectToSignUp() {
     const { history } = props;
-    history.push(routes.auth.signIn.getRedirectPath());
+    history.push(routes.auth.signUp.getRedirectPath());
+  }
+
+  function redirectToRestore() {
+    const { history } = props;
+    history.push(routes.auth.restore.getRedirectPath());
   }
 }
 
-const SignUpAuthLayout = withAsyncFeatures({
+const SignInLayout = withAsyncFeatures({
   authorizationFeatureEntry: features.authorization.loadEntry,
-})(SignUpAuthLayoutComponent);
+})(SignInLayoutComponent);
 
-export { SignUpAuthLayout, SignUpAuthLayoutComponent, IProps as ISignUpLayoutProps };
+export { SignInLayout, SignInLayoutComponent, IProps as ISignInLayoutProps };

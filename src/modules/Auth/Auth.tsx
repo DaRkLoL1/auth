@@ -4,7 +4,7 @@ import { Route, Switch } from 'react-router-dom';
 import { routes } from 'modules/routes';
 import { IModule } from 'shared/types/app';
 
-import { SignInAuthLayout, SignUpAuthLayout, RestoreAuthLayout, AccountAuthLayout } from './view/components';
+import { SignInLayout, SignUpLayout, RestoreLayout, AccountLayout } from './view/components';
 
 const Auth: IModule = {
   getRoutes() {
@@ -17,22 +17,22 @@ const Auth: IModule = {
           <Route
             key={routes.auth.signIn.getElementKey()}
             path={routes.auth.signIn.getRoutePath()}
-            component={SignInAuthLayout}
+            component={SignInLayout}
           />
           <Route
             key={routes.auth.signUp.getElementKey()}
             path={routes.auth.signUp.getRoutePath()}
-            component={SignUpAuthLayout}
+            component={SignUpLayout}
           />
           <Route
             key={routes.auth.restore.getElementKey()}
             path={routes.auth.restore.getRoutePath()}
-            component={RestoreAuthLayout}
+            component={RestoreLayout}
           />
           <Route
             key={routes.auth.account.getElementKey()}
             path={routes.auth.account.getRoutePath()}
-            component={AccountAuthLayout}
+            component={AccountLayout}
           />
         </Switch>
       </Route>
