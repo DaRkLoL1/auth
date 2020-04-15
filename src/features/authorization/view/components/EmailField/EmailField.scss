@@ -1,0 +1,38 @@
+.email-field {
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 16px;
+    margin-bottom: 10px;
+  }
+
+  &__title {
+    margin: 0;
+    padding-right: 11px;
+    padding-left: 11px;
+    color: #3c485e;
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  &__text-error {
+    color: #e31e24;
+    font-size: 9px;
+    line-height: 120%;
+  }
+
+  &__field {
+    padding: 15px 11px 10px;
+    width: 100%;
+    border: 0.5px solid #b3b9d1;
+    border-radius: 4px;
+    background-color: #fff;
+    color: #b3b9d1;
+    font-size: 16px;
+    line-height: 24px;
+
+    &_with-error {
+      border-color: #e31e24;
+    }
+  }
+}

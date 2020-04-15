@@ -2,7 +2,8 @@ import React from 'react';
 import block from 'bem-cn';
 import { autobind } from 'core-decorators';
 
-import { TextField } from '../TextField/TextField';
+import { EmailField } from '../EmailField/EmailField';
+import { PasswordField } from '../PasswordField/PasswordField';
 import { Button } from '../Button/Button';
 import './AuthorizationForm.scss';
 
@@ -19,23 +20,22 @@ interface IProps {
 interface IState {
   email: string;
   password: string;
-  passwordError: boolean;
 }
 
 class AuthorizationForm extends React.Component<IProps, IState> {
   public state: IState = {
     email: '',
     password: '',
-    passwordError: false,
   };
 
   render() {
     const { type, onRedirectClick, onRedirectToRestoreClick, errorMessage } = this.props;
-    const { email, password, passwordError } = this.state;
+    const { email, password } = this.state;
 
     let title = 'Войти';
     let titleButton = 'Войти';
     let titleRedirect = 'Войти ';
+    let passwordCheckMin = true;
 
     if (type === 'signUp') {
       title = 'Регистрация';
@@ -44,6 +44,7 @@ class AuthorizationForm extends React.Component<IProps, IState> {
 
     if (type === 'signIn') {
       titleRedirect = 'Зарегистрироваться ';
+      passwordCheckMin = false;
     }
 
     if (type === 'restore') {
@@ -64,17 +65,18 @@ class AuthorizationForm extends React.Component<IProps, IState> {
 
           {errorMessage && <h2 className={b('error-title')}>{errorMessage}</h2>}
 
-          <h2 className={b('title-input')}>Email</h2>
           <div className={b('input')}>
-            <TextField type="email" value={email} onChange={this.changeEmail} />
+            <EmailField value={email} onChange={this.changeEmail} />
           </div>
 
           {(type !== 'restore') && (
             <>
-              <h2 className={b('title-input')}>Пароль</h2>
-              {passwordError && <p className={b('password-error')}>Пароль не соответствует требованиям</p>}
               <div className={b('input')}>
-                <TextField type="password" value={password} onChange={this.changePassword} />
+                <PasswordField
+                  checkMinValue={passwordCheckMin}
+                  value={password}
+                  onChange={this.changePassword}
+                />
               </div>
             </>
           )}
@@ -129,48 +131,24 @@ class AuthorizationForm extends React.Component<IProps, IState> {
   @autobind
   private onSubmit(event: React.SyntheticEvent) {
     event.preventDefault();
-    const { onClick, type } = this.props;
+    const { onClick } = this.props;
     const { email, password } = this.state;
-
-    if (type !== 'restore') {
-      if (!this.checkPassword(password)) {
-        return;
-      }
-
-      this.setState({
-        passwordError: false,
-      });
-    }
 
     onClick(email, password);
   }
 
   @autobind
-  private changeEmail(event: React.ChangeEvent<HTMLInputElement>) {
+  private changeEmail(value: string) {
     this.setState({
-      email: event.target.value,
+      email: value,
     });
   }
 
   @autobind
-  private changePassword(event: React.ChangeEvent<HTMLInputElement>) {
+  private changePassword(value: string) {
     this.setState({
-      password: event.target.value,
+      password: value,
     });
-  }
-
-  @autobind
-  private checkPassword(password: string): boolean {
-    const minimunSymbols = password.length >= 8;
-    const upperCase = /[A-Z]/.test(password);
-    const lowerCase = /[a-z]/.test(password);
-    const numberSymbol = /\d/.test(password);
-    if (minimunSymbols && upperCase && lowerCase && numberSymbol) return true;
-
-    this.setState({
-      passwordError: true,
-    });
-    return false;
   }
 }
 

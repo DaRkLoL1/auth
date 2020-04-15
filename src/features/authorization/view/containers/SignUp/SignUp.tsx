@@ -18,7 +18,7 @@ const mapDispatch = {
 };
 
 interface IStateProps {
-  error: string | {};
+  error: string | {code: string};
 }
 
 function mapState(state: IAppReduxState): IStateProps {
@@ -35,7 +35,11 @@ class SignUpComponent extends React.Component<IProps> {
     const { onRedirectClick, error } = this.props;
     let errorMessage: string = '';
     if (typeof error === 'object') {
-      errorMessage = 'Этот email адрес уже используется на другом аккаунте';
+      if (error.code === 'auth/invalid-email') {
+        errorMessage = 'Адрес электронной почты плохо отформатирован';
+      } else if (error.code === 'auth/email-already-in-use') {
+        errorMessage = 'Этот email адрес уже используется на другом аккаунте';
+      }
     }
 
     return (

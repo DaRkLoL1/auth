@@ -12,12 +12,11 @@ interface IProps {
 }
 
 function TextField(props: IProps) {
-  const { type, value, onChange } = props;
+  const { value, onChange } = props;
   return (
     <input
       required
       className={b()}
-      type={type}
       value={value}
       onChange={(event: React.ChangeEvent<HTMLInputElement>) => onChange(event)}
     />
