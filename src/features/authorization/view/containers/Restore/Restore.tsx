@@ -17,7 +17,7 @@ const mapDispatch = {
 };
 
 interface IStateProps {
-  error: string | {};
+  error: string | {code: string};
 }
 
 function mapState(state: IAppReduxState): IStateProps {
@@ -34,7 +34,11 @@ class RestoreComponent extends React.Component<IProps> {
     const { onRedirectClick, error } = this.props;
     let errorMessage: string = '';
     if (typeof error === 'object') {
-      errorMessage = 'Нет никакой записи пользователя, соответствующей этому идентификатору. Возможно, пользователь был удален';
+      if (error.code === 'auth/invalid-email') {
+        errorMessage = 'Адрес электронной почты плохо отформатирован';
+      } else {
+        errorMessage = 'Нет никакой записи пользователя, соответствующей этому идентификатору. Возможно, пользователь был удален';
+      }
     }
     return (
       <AuthorizationForm

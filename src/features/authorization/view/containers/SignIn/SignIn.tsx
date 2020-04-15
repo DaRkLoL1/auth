@@ -40,6 +40,8 @@ class SignInComponent extends React.Component<IProps> {
         errorMessage = 'Пароль недействителен или у пользователя нет пароля';
       } else if (error.code === 'auth/user-not-found') {
         errorMessage = 'Нет никакой записи пользователя, соответствующей этому идентификатору. Возможно, пользователь был удален';
+      } else {
+        errorMessage = 'Адрес электронной почты плохо отформатирован';
       }
     }
 
