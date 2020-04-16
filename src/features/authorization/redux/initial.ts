@@ -11,6 +11,7 @@ const initial: IReduxState = {
     signOutUser: initialCommunicationField,
     resetPassword: initialCommunicationField,
     restore: initialCommunicationField,
+    stateChanged: initialCommunicationField,
   },
 };
 

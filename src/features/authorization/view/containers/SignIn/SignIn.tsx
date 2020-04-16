@@ -1,4 +1,5 @@
 import React from 'react';
+import { Redirect } from 'react-router-dom';
 import { autobind } from 'core-decorators';
 import { connect } from 'react-redux';
 
@@ -11,19 +12,28 @@ interface IOwnProps {
   onRedirectClick: () => void;
   onRedirectToRestoreClick: () => void;
   signInUser: (object: {email: string, password: string}) => void;
+  accountRedirect: () => string;
+  setUser: (user: string) => void;
+  clearUser: () => void;
+  stateChanged: (object: {setUser: (user: string) => void, clearUser: () => void}) => void;
 }
 
 const mapDispatch = {
   signInUser: actionCreators.signInUser,
+  stateChanged: actionCreators.stateChanged,
+  setUser: actionCreators.setUser,
+  clearUser: actionCreators.clearUser,
 };
 
 interface IStateProps {
   error: string | {code: string};
+  user: string;
 }
 
 function mapState(state: IAppReduxState): IStateProps {
   return {
     error: selectors.selectCommunication(state, 'signInUser').error,
+    user: selectors.selectUser(state),
   };
 }
 
@@ -31,8 +41,13 @@ type IProps = IOwnProps & IStateProps;
 
 @autobind
 class SignInComponent extends React.Component<IProps> {
+  componentDidMount() {
+    const { setUser, clearUser, stateChanged } = this.props;
+    stateChanged({ setUser, clearUser });
+  }
+
   public render() {
-    const { onRedirectClick, onRedirectToRestoreClick, error } = this.props;
+    const { onRedirectClick, onRedirectToRestoreClick, error, accountRedirect, user } = this.props;
 
     let errorMessage: string = '';
     if (typeof error === 'object') {
@@ -43,6 +58,10 @@ class SignInComponent extends React.Component<IProps> {
       } else {
         errorMessage = 'Адрес электронной почты плохо отформатирован';
       }
+    }
+
+    if (user) {
+      return <Redirect to={accountRedirect()} />;
     }
 
     return (

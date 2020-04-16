@@ -31,6 +31,17 @@ class Api {
   public async restore(email: string): Promise<void> {
     await firebase.auth().sendPasswordResetEmail(email);
   }
+
+  public async stateChanged(setUser: (user: string) => void, clearUser: () => void): Promise<void> {
+    await firebase.auth().onAuthStateChanged((user) => {
+      if (user && user.email) {
+        setUser(user.email);
+      }
+      else {
+        clearUser();
+      }
+    });
+  }
 }
 
 export { Api };

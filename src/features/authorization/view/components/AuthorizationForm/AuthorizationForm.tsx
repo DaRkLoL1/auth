@@ -29,7 +29,12 @@ class AuthorizationForm extends React.Component<IProps, IState> {
   };
 
   render() {
-    const { type, onRedirectClick, onRedirectToRestoreClick, errorMessage } = this.props;
+    const {
+      type,
+      onRedirectClick,
+      onRedirectToRestoreClick,
+      errorMessage,
+    } = this.props;
     const { email, password } = this.state;
 
     let title = 'Войти';

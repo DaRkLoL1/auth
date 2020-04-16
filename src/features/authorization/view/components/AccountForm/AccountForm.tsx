@@ -26,10 +26,11 @@ class AccountForm extends React.Component<IProps, IState> {
   render() {
     const { user, handleSignOut } = this.props;
     const { password } = this.state;
-    let account = <h2 className={b('title')}>Войдите в аккаунт</h2>;
-    if (user) {
-      account = (
-        <>
+
+    return (
+      <form onSubmit={this.onSybmit} className={b()}>
+        <div className={b('wrapper')}>
+          <h1 className={b('title')}>Аккаунт</h1>
           <h2 className={b('title')}>
             Вы вошли как
             {' '}
@@ -46,15 +47,6 @@ class AccountForm extends React.Component<IProps, IState> {
             <Button text="Изменить пароль" />
           </div>
           <button className={b('exit')} type="button" onClick={() => handleSignOut()}>Выйти</button>
-        </>
-      );
-    }
-
-    return (
-      <form onSubmit={this.onSybmit} className={b()}>
-        <div className={b('wrapper')}>
-          <h1 className={b('title')}>Аккаунт</h1>
-          {account}
         </div>
       </form>
     );

@@ -18,7 +18,11 @@ function SignInLayoutComponent(props: IProps) {
   const { SignIn } = containers;
   return (
     <Layout>
-      <SignIn onRedirectClick={redirectToSignUp} onRedirectToRestoreClick={redirectToRestore} />
+      <SignIn
+        accountRedirect={redirectToAccount}
+        onRedirectClick={redirectToSignUp}
+        onRedirectToRestoreClick={redirectToRestore}
+      />
     </Layout>
   );
 
@@ -30,6 +34,10 @@ function SignInLayoutComponent(props: IProps) {
   function redirectToRestore() {
     const { history } = props;
     history.push(routes.auth.restore.getRedirectPath());
+  }
+
+  function redirectToAccount(): string {
+    return routes.auth.account.getRedirectPath();
   }
 }
 

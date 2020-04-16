@@ -1,4 +1,5 @@
 import React from 'react';
+import { Redirect } from 'react-router-dom';
 import { autobind } from 'core-decorators';
 import { connect } from 'react-redux';
 
@@ -10,6 +11,7 @@ import { AuthorizationForm } from '../../components/index';
 interface IOwnProps {
   onRedirectClick: () => void;
   restore: (object: {email: string}) => void;
+  accountRedirect: () => string;
 }
 
 const mapDispatch = {
@@ -18,11 +20,13 @@ const mapDispatch = {
 
 interface IStateProps {
   error: string | {code: string};
+  user: string;
 }
 
 function mapState(state: IAppReduxState): IStateProps {
   return {
     error: selectors.selectCommunication(state, 'restore').error,
+    user: selectors.selectUser(state),
   };
 }
 
@@ -31,7 +35,7 @@ type IProps = IOwnProps & IStateProps;
 @autobind
 class RestoreComponent extends React.Component<IProps> {
   public render() {
-    const { onRedirectClick, error } = this.props;
+    const { onRedirectClick, error, accountRedirect, user } = this.props;
     let errorMessage: string = '';
     if (typeof error === 'object') {
       if (error.code === 'auth/invalid-email') {
@@ -40,6 +44,11 @@ class RestoreComponent extends React.Component<IProps> {
         errorMessage = 'Нет никакой записи пользователя, соответствующей этому идентификатору. Возможно, пользователь был удален';
       }
     }
+
+    if (user) {
+      return <Redirect to={accountRedirect()} />;
+    }
+
     return (
       <AuthorizationForm
         type="restore"
