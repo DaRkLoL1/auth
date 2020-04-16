@@ -55,4 +55,14 @@ export const communicationReducer = combineReducers<NS.IReduxState['communicatio
     'AUTHORIZATION:RESTORE_FAIL',
     initial.communication.restore,
   ),
+  stateChanged: makeCommunicationReducer<
+  NS.IStateChanged,
+  NS.IStateChangedSuccess,
+  NS.IStateChangedFail
+  >(
+    'AUTHORIZATION:STATE_CHANGED',
+    'AUTHORIZATION:STATE_CHANGED_SUCCESS',
+    'AUTHORIZATION:STATE_CHANGED_FAIL',
+    initial.communication.stateChanged,
+  ),
 });

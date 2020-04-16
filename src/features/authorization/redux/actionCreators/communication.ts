@@ -53,3 +53,14 @@ NS.IRestoreSuccess, NS.IRestoreFail>(
   'AUTHORIZATION:RESTORE_SUCCESS',
   'AUTHORIZATION:RESTORE_FAIL',
 );
+
+export const {
+  execute: stateChanged,
+  completed: stateChangedSuccess,
+  failed: stateChangedFail,
+} = makeCommunicationActionCreators<NS.IStateChanged,
+NS.IStateChangedSuccess, NS.IStateChangedFail>(
+  'AUTHORIZATION:STATE_CHANGED',
+  'AUTHORIZATION:STATE_CHANGED_SUCCESS',
+  'AUTHORIZATION:STATE_CHANGED_FAIL',
+);
