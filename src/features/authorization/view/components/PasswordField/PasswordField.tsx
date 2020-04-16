@@ -45,7 +45,7 @@ class PasswordField extends React.Component<IProps, IState> {
           <input
             type="text"
             required
-            placeholder="* * * * * * * * * * *"
+            placeholder="* * * * * * * * *"
             className={b('field', textError ? { 'with-error': true } : { 'with-error': false })}
             value={text}
             onChange={this.onHandleChange}
@@ -99,7 +99,11 @@ class PasswordField extends React.Component<IProps, IState> {
     const { isVisible } = this.state;
 
     if (!isVisible) {
-      target = value + target[target.length - 1];
+      if (value.length > target.length) {
+        target = value.slice(0, value.length - 1);
+      } else {
+        target = value + target[target.length - 1];
+      }
     }
 
     onChange(target);
