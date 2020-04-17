@@ -7,6 +7,7 @@ import * as validators from 'shared/validators';
 import './EmailField.scss';
 
 interface IProps {
+  checkEmail?: boolean;
   value: string;
   onChange: (value: string) => void;
 }
@@ -55,6 +56,15 @@ class EmailField extends React.Component<IProps, IState> {
     this.setState({
       textError: validators.makeRequired('Поле обязательно для заполнения')(target),
     });
+
+    const { checkEmail } = this.props;
+    if (checkEmail) {
+      if (target.length > 0) {
+        this.setState({
+          textError: validators.makeEmail('Email должен содержать \u00ab@\u00bb')(target),
+        });
+      }
+    }
   }
 
   onHandleChange(event: React.ChangeEvent<HTMLInputElement>): void {
