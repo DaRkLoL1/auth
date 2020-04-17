@@ -7,3 +7,7 @@ export function setUser(user: string): NS.ISetUser {
 export function clearUser(): NS.IClearUser {
   return { type: 'AUTHORIZATION:CLEAR_USER' };
 }
+
+export function clearMessage(): NS.IClearMessage {
+  return { type: 'AUTHORIZATION:CLEAR_MESSAGE' };
+}

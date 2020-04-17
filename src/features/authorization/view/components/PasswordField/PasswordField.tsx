@@ -29,10 +29,10 @@ class PasswordField extends React.Component<IProps, IState> {
   render() {
     const { textError, isHidden } = this.state;
     const { value } = this.props;
-    let text: string = value;
+    let type = 'text';
 
     if (isHidden) {
-      text = '*'.repeat(value.length);
+      type = 'password';
     }
 
     return (
@@ -43,11 +43,11 @@ class PasswordField extends React.Component<IProps, IState> {
         </div>
         <div className={b('input')}>
           <input
-            type="text"
+            type={type}
             required
             placeholder="* * * * * * * * *"
             className={b('field', textError ? { 'with-error': true } : { 'with-error': false })}
-            value={text}
+            value={value}
             onChange={this.onHandleChange}
             onBlur={this.onBlur}
           />
@@ -92,20 +92,10 @@ class PasswordField extends React.Component<IProps, IState> {
   }
 
   onHandleChange(event: React.ChangeEvent<HTMLInputElement>): void {
-    let target = event.target.value;
+    const target = event.target.value;
     this.onCheckValues(target);
 
-    const { onChange, value } = this.props;
-    const { isHidden } = this.state;
-
-    if (isHidden) {
-      if (value.length > target.length) {
-        target = value.slice(0, value.length - 1);
-      } else {
-        target = value + target[target.length - 1];
-      }
-    }
-
+    const { onChange } = this.props;
     onChange(target);
   }
 }

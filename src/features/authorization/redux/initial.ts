@@ -3,8 +3,10 @@ import { initialCommunicationField } from 'shared/constants';
 import { IReduxState } from '../namespace';
 
 const initial: IReduxState = {
-  user: '',
-
+  auth: {
+    user: '',
+    sendMessage: false,
+  },
   communication: {
     signInUser: initialCommunicationField,
     signUpUser: initialCommunicationField,

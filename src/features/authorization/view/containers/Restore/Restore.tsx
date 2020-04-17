@@ -12,14 +12,17 @@ interface IOwnProps {
   onRedirectClick: () => void;
   restore: (object: {email: string}) => void;
   accountRedirect: () => string;
+  clearMessage: () => void;
 }
 
 const mapDispatch = {
   restore: actionCreators.restore,
+  clearMessage: actionCreators.clearMessage,
 };
 
 interface IStateProps {
   error: string | {code: string};
+  sendMessage: boolean;
   user: string;
 }
 
@@ -27,6 +30,7 @@ function mapState(state: IAppReduxState): IStateProps {
   return {
     error: selectors.selectCommunication(state, 'restore').error,
     user: selectors.selectUser(state),
+    sendMessage: selectors.selectMessage(state),
   };
 }
 
@@ -34,15 +38,36 @@ type IProps = IOwnProps & IStateProps;
 
 @autobind
 class RestoreComponent extends React.Component<IProps> {
+  private timeId: NodeJS.Timeout | undefined;
+
+  componentDidUpdate() {
+    const { sendMessage, clearMessage } = this.props;
+
+    if (sendMessage) {
+      this.timeId = setTimeout(clearMessage, 5000);
+    }
+  }
+
+  componentWillUnmount() {
+    if (this.timeId) clearTimeout(this.timeId);
+  }
+
   public render() {
-    const { onRedirectClick, error, accountRedirect, user } = this.props;
+    const { onRedirectClick, error, accountRedirect, user, sendMessage } = this.props;
     let errorMessage: string = '';
+
     if (typeof error === 'object') {
       if (error.code === 'auth/invalid-email') {
         errorMessage = 'Адрес электронной почты плохо отформатирован';
       } else {
         errorMessage = 'Нет никакой записи пользователя, соответствующей этому идентификатору. Возможно, пользователь был удален';
       }
+    }
+
+    let message: string = '';
+
+    if (sendMessage) {
+      message = 'Письмо было отправлено';
     }
 
     if (user) {
@@ -54,6 +79,7 @@ class RestoreComponent extends React.Component<IProps> {
         type="restore"
         onRedirectClick={onRedirectClick}
         errorMessage={errorMessage}
+        message={message}
         onClick={this.handleRestore}
       />
     );
