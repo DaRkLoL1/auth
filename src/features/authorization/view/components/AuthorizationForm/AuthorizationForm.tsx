@@ -40,7 +40,7 @@ class AuthorizationForm extends React.Component<IProps, IState> {
     let title = 'Войти';
     let titleButton = 'Войти';
     let titleRedirect = 'Войти ';
-    let passwordCheckMin = true;
+    let check = true;
 
     if (type === 'signUp') {
       title = 'Регистрация';
@@ -49,7 +49,7 @@ class AuthorizationForm extends React.Component<IProps, IState> {
 
     if (type === 'signIn') {
       titleRedirect = 'Зарегистрироваться ';
-      passwordCheckMin = false;
+      check = false;
     }
 
     if (type === 'restore') {
@@ -71,14 +71,14 @@ class AuthorizationForm extends React.Component<IProps, IState> {
           {errorMessage && <h2 className={b('error-title')}>{errorMessage}</h2>}
 
           <div className={b('input')}>
-            <EmailField value={email} onChange={this.changeEmail} />
+            <EmailField checkEmail={check} value={email} onChange={this.changeEmail} />
           </div>
 
           {(type !== 'restore') && (
             <>
               <div className={b('input')}>
                 <PasswordField
-                  checkMinValue={passwordCheckMin}
+                  checkMinValue={check}
                   value={password}
                   onChange={this.changePassword}
                 />
