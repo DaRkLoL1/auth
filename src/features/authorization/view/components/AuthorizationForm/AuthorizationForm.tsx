@@ -15,6 +15,7 @@ interface IProps {
   onRedirectToRestoreClick?: () => void;
   onClick: (email: string, password: string) => void;
   errorMessage: string;
+  message?: string;
 }
 
 interface IState {
@@ -34,6 +35,7 @@ class AuthorizationForm extends React.Component<IProps, IState> {
       onRedirectClick,
       onRedirectToRestoreClick,
       errorMessage,
+      message,
     } = this.props;
     const { email, password } = this.state;
 
@@ -69,6 +71,7 @@ class AuthorizationForm extends React.Component<IProps, IState> {
           )}
 
           {errorMessage && <h2 className={b('error-title')}>{errorMessage}</h2>}
+          {message && <h2 className={b('title')}>{message}</h2>}
 
           <div className={b('input')}>
             <EmailField checkEmail={check} value={email} onChange={this.changeEmail} />

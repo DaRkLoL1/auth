@@ -8,7 +8,11 @@ function selectFeatureState(state: IAppReduxState) {
 }
 
 export function selectUser(state: IAppReduxState) {
-  return selectFeatureState(state).user;
+  return selectFeatureState(state).auth.user;
+}
+
+export function selectMessage(state: IAppReduxState) {
+  return selectFeatureState(state).auth.sendMessage;
 }
 
 export function selectCommunication(

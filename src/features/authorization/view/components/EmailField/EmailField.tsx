@@ -35,7 +35,7 @@ class EmailField extends React.Component<IProps, IState> {
           {textError && <div className={b('text-error')}>{textError}</div>}
         </div>
         <input
-          type="text"
+          type="email"
           required
           placeholder="ivanova@mail.ru"
           className={b('field', textError ? { 'with-error': true } : { 'with-error': false })}

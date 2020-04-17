@@ -1,7 +1,10 @@
 import { ICommunication, IAction, IPlainFailAction, IPlainAction } from 'shared/types/redux';
 
 export interface IReduxState {
-  user: string;
+  auth: {
+    user: string,
+    sendMessage: boolean,
+  },
   communication: {
     signInUser: ICommunication;
     signUpUser: ICommunication;
@@ -14,6 +17,8 @@ export interface IReduxState {
 
 export type ISetUser = IAction<'AUTHORIZATION:SET_USER', string>;
 export type IClearUser = IPlainAction<'AUTHORIZATION:CLEAR_USER'>;
+
+export type IClearMessage = IPlainAction<'AUTHORIZATION:CLEAR_MESSAGE'>;
 
 export type IStateChanged = IAction<'AUTHORIZATION:STATE_CHANGED', {setUser: (user: string) => void, clearUser: () => void}>;
 export type IStateChangedSuccess = IAction<'AUTHORIZATION:STATE_CHANGED_SUCCESS', void>;
@@ -42,6 +47,7 @@ export type IRestoreFail = IPlainFailAction<'AUTHORIZATION:RESTORE_FAIL'>;
 export type IAction =
   | ISetUser
   | IClearUser
+  | IClearMessage
   | ISignIn
   | IStateChanged
   | IStateChangedSuccess
