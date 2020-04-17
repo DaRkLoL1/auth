@@ -14,7 +14,7 @@ interface IProps {
 
 interface IState {
   textError: string | undefined;
-  isVisible: boolean;
+  isHidden: boolean;
 }
 
 const b = block('password-field');
@@ -23,15 +23,15 @@ const b = block('password-field');
 class PasswordField extends React.Component<IProps, IState> {
   state = {
     textError: undefined,
-    isVisible: false,
+    isHidden: true,
   };
 
   render() {
-    const { textError, isVisible } = this.state;
+    const { textError, isHidden } = this.state;
     const { value } = this.props;
     let text: string = value;
 
-    if (!isVisible) {
+    if (isHidden) {
       text = '*'.repeat(value.length);
     }
 
@@ -52,11 +52,11 @@ class PasswordField extends React.Component<IProps, IState> {
             onBlur={this.onBlur}
           />
           <button
-            className={b('button', textError ? { 'with-error': true } : { 'with-error': false }, isVisible ? { visibled: true } : { visibled: false })}
+            className={b('button', textError ? { 'with-error': true } : { 'with-error': false }, isHidden ? { visibled: false } : { visibled: true })}
             type="button"
             onClick={this.onButtonClick}
           >
-            Скрыть
+            {!isHidden && 'Скрыть'}
           </button>
         </div>
       </div>
@@ -66,7 +66,7 @@ class PasswordField extends React.Component<IProps, IState> {
   onButtonClick() {
     this.setState(prevState => (
       {
-        isVisible: !prevState.isVisible,
+        isHidden: !prevState.isHidden,
       }
     ));
   }
@@ -96,9 +96,9 @@ class PasswordField extends React.Component<IProps, IState> {
     this.onCheckValues(target);
 
     const { onChange, value } = this.props;
-    const { isVisible } = this.state;
+    const { isHidden } = this.state;
 
-    if (!isVisible) {
+    if (isHidden) {
       if (value.length > target.length) {
         target = value.slice(0, value.length - 1);
       } else {
