@@ -1,14 +1,11 @@
 import React from 'react';
 import { withAsyncFeatures } from 'core';
-import { History } from 'history';
 import * as features from 'features';
 
 import { Layout } from '../../../../shared/Layout/Layout';
-import { routes } from '../../../routes';
 
 interface IFeatureProps {
   authorizationFeatureEntry: features.authorization.Entry;
-  history: History;
 }
 
 type IProps = IFeatureProps;
@@ -19,14 +16,10 @@ function RestoreLayoutComponent(props: IProps) {
 
   return (
     <Layout>
-      <Restore onRedirectClick={redirectToSignIn} />
+      <Restore />
     </Layout>
   );
 
-  function redirectToSignIn() {
-    const { history } = props;
-    history.push(routes.auth.signIn.getRedirectPath());
-  }
 }
 
 const RestoreLayout = withAsyncFeatures({

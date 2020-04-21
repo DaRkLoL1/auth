@@ -9,7 +9,6 @@ import { SignUpForm } from '../../components/index';
 
 
 interface IOwnProps {
-  onRedirectClick: () => void;
   signUpUser: (object: {email: string, password: string}) => void;
   onSuccessSignUp: () => void;
 }
@@ -51,7 +50,7 @@ class SignUpComponent extends React.Component<IProps> {
   }
 
   public render() {
-    const { onRedirectClick, error } = this.props;
+    const { error } = this.props;
     let errorMessage: string = '';
     if (typeof error === 'object') {
       if (error.code === 'auth/invalid-email') {
@@ -63,7 +62,6 @@ class SignUpComponent extends React.Component<IProps> {
 
     return (
       <SignUpForm
-        onRedirectClick={onRedirectClick}
         errorMessage={errorMessage}
         onClick={this.handleSignUp}
       />

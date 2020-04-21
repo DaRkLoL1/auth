@@ -20,21 +20,9 @@ function SignInLayoutComponent(props: IProps) {
     <Layout>
       <SignIn
         onSuccessSignIn={redirectToAccount}
-        onRedirectClick={redirectToSignUp}
-        onRedirectToRestoreClick={redirectToRestore}
       />
     </Layout>
   );
-
-  function redirectToSignUp() {
-    const { history } = props;
-    history.push(routes.auth.signUp.getRedirectPath());
-  }
-
-  function redirectToRestore() {
-    const { history } = props;
-    history.push(routes.auth.restore.getRedirectPath());
-  }
 
   function redirectToAccount(): void {
     const { history } = props;
