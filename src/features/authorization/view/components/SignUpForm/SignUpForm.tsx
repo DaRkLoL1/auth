@@ -9,7 +9,6 @@ import '../auth-form/auth-form.scss';
 const b = block('auth-form');
 
 interface IProps {
-  onRedirectClick: () => void;
   onClick: (email: string, password: string) => void;
   errorMessage: string;
 }
@@ -26,7 +25,7 @@ class SignUpForm extends React.Component<IProps, IState> {
   };
 
   render() {
-    const { onRedirectClick, errorMessage } = this.props;
+    const { errorMessage } = this.props;
     const { email, password } = this.state;
 
     return (
@@ -59,7 +58,7 @@ class SignUpForm extends React.Component<IProps, IState> {
           <div className={b('button')}>
             <Button text="Зарегистрироваться" />
           </div>
-          <button className={b('link')} type="button" onClick={() => onRedirectClick()}>Войти</button>
+          <a href="signIn" className={b('link')}>Войти</a>
           <p className={b('text')}>
             <span>
               Нажимая на кнопку &laquo;Зарегистрироваться&raquo;,

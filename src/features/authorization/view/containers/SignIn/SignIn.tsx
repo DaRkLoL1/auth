@@ -8,8 +8,6 @@ import { actionCreators, selectors } from './../../../redux';
 import { SignInForm } from '../../components/index';
 
 interface IOwnProps {
-  onRedirectClick: () => void;
-  onRedirectToRestoreClick: () => void;
   signInUser: (object: {email: string, password: string}) => void;
   onSuccessSignIn: () => void;
   setUser: (user: string) => void;
@@ -58,7 +56,7 @@ class SignInComponent extends React.Component<IProps> {
   }
 
   public render() {
-    const { onRedirectClick, onRedirectToRestoreClick, error } = this.props;
+    const { error } = this.props;
 
     let errorMessage: string = '';
     if (typeof error === 'object') {
@@ -73,9 +71,7 @@ class SignInComponent extends React.Component<IProps> {
 
     return (
       <SignInForm
-        onRedirectClick={onRedirectClick}
         errorMessage={errorMessage}
-        onRedirectToRestoreClick={onRedirectToRestoreClick}
         onClick={this.handleSignIn}
       />
     );

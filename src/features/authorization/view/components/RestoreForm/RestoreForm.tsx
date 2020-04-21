@@ -9,7 +9,6 @@ import '../auth-form/auth-form.scss';
 const b = block('auth-form');
 
 interface IProps {
-  onRedirectClick: () => void;
   onClick: (email: string) => void;
   errorMessage: string;
   message: string;
@@ -25,7 +24,7 @@ class RestoreForm extends React.Component<IProps, IState> {
   };
 
   render() {
-    const { onRedirectClick, errorMessage, message } = this.props;
+    const { errorMessage, message } = this.props;
     const { email } = this.state;
 
     return (
@@ -45,7 +44,7 @@ class RestoreForm extends React.Component<IProps, IState> {
           <div className={b('button')}>
             <Button text="Отправить новый пароль" />
           </div>
-          <button className={b('link')} type="button" onClick={() => onRedirectClick()}>Войти</button>
+          <a href="signIn" className={b('link')}>Войти</a>
         </div>
       </form>
     );

@@ -8,7 +8,6 @@ import { actionCreators, selectors } from './../../../redux';
 import { RestoreForm } from '../../components/index';
 
 interface IOwnProps {
-  onRedirectClick: () => void;
   restore: (object: {email: string}) => void;
   clearMessage: () => void;
 }
@@ -49,7 +48,7 @@ class RestoreComponent extends React.Component<IProps> {
   }
 
   public render() {
-    const { onRedirectClick, error, sendMessage } = this.props;
+    const { error, sendMessage } = this.props;
     let errorMessage: string = '';
 
     if (typeof error === 'object') {
@@ -68,7 +67,6 @@ class RestoreComponent extends React.Component<IProps> {
 
     return (
       <RestoreForm
-        onRedirectClick={onRedirectClick}
         errorMessage={errorMessage}
         message={message}
         onClick={this.handleRestore}

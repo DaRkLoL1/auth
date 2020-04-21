@@ -64,15 +64,15 @@
     line-height: 120%;
   }
 
-  &__restore {
+  &__restore-link {
     padding: 2px 0;
     outline: none;
     border: none;
     background-color: transparent;
     color: #5867dd;
+    text-decoration: none;
     font-size: 12px;
     line-height: 20px;
-    cursor: pointer;
 
     &:focus {
       color: black;
@@ -95,6 +95,7 @@
     background-repeat: no-repeat;
     color: #5867dd;
     text-align: center;
+    text-decoration: none;
     font-size: 14px;
     line-height: 22px;
     cursor: pointer;
