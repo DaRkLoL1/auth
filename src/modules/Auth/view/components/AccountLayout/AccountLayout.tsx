@@ -1,7 +1,8 @@
 import React from 'react';
-import { withAsyncFeatures } from 'core';
 import { History } from 'history';
+
 import * as features from 'features';
+import { withAsyncFeatures } from 'core';
 
 import { Layout } from '../../../../shared/Layout/Layout';
 import { routes } from '../../../routes';
@@ -18,12 +19,13 @@ function AccountLayoutComponent(props: IProps) {
   const { Account } = containers;
   return (
     <Layout>
-      <Account onExitClick={redirectToSignIn} />
+      <Account onLogOut={redirectToSignIn} />
     </Layout>
   );
 
-  function redirectToSignIn(): string {
-    return routes.auth.signIn.getRedirectPath();
+  function redirectToSignIn() {
+    const { history } = props;
+    history.push(routes.auth.signIn.getRedirectPath());
   }
 }
 

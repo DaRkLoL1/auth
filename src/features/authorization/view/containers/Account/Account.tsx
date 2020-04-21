@@ -1,5 +1,4 @@
 import React from 'react';
-import { Redirect } from 'react-router-dom';
 import { autobind } from 'core-decorators';
 import { connect } from 'react-redux';
 
@@ -18,7 +17,7 @@ interface IProps {
   user: string;
   signOutUser: () => void;
   resetPassword: (object: {password: string}) => void;
-  onExitClick: () => string;
+  onLogOut: () => void;
 }
 
 const mapDispatch = {
@@ -28,13 +27,24 @@ const mapDispatch = {
 
 @autobind
 class AccountComponent extends React.Component<IProps> {
+  componentDidMount() {
+    const { user, onLogOut } = this.props;
+
+    if (!user) {
+      onLogOut();
+    }
+  }
+
+  componentDidUpdate() {
+    const { user, onLogOut } = this.props;
+
+    if (!user) {
+      onLogOut();
+    }
+  }
 
   public render() {
-    const { user, onExitClick } = this.props;
-    if (!user) {
-      return <Redirect to={onExitClick()} />;
-    }
-
+    const { user } = this.props;
     return (
       <AccountForm
         user={user}

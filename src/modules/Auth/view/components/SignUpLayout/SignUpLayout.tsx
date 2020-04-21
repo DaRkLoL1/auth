@@ -19,7 +19,7 @@ function SignUpLayoutComponent(props: IProps) {
 
   return (
     <Layout>
-      <SignUp accountRedirect={redirectToAccount} onRedirectClick={redirectToSignIn} />
+      <SignUp onSuccessSignUp={redirectToAccount} onRedirectClick={redirectToSignIn} />
     </Layout>
   );
 
@@ -28,8 +28,9 @@ function SignUpLayoutComponent(props: IProps) {
     history.push(routes.auth.signIn.getRedirectPath());
   }
 
-  function redirectToAccount(): string {
-    return routes.auth.account.getRedirectPath();
+  function redirectToAccount(): void {
+    const { history } = props;
+    history.push(routes.auth.account.getRedirectPath());
   }
 }
 

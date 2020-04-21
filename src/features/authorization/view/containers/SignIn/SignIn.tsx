@@ -1,5 +1,4 @@
 import React from 'react';
-import { Redirect } from 'react-router-dom';
 import { autobind } from 'core-decorators';
 import { connect } from 'react-redux';
 
@@ -12,7 +11,7 @@ interface IOwnProps {
   onRedirectClick: () => void;
   onRedirectToRestoreClick: () => void;
   signInUser: (object: {email: string, password: string}) => void;
-  accountRedirect: () => string;
+  onSuccessSignIn: () => void;
   setUser: (user: string) => void;
   clearUser: () => void;
   stateChanged: (object: {setUser: (user: string) => void, clearUser: () => void}) => void;
@@ -42,12 +41,24 @@ type IProps = IOwnProps & IStateProps;
 @autobind
 class SignInComponent extends React.Component<IProps> {
   componentDidMount() {
-    const { setUser, clearUser, stateChanged } = this.props;
+    const { setUser, clearUser, stateChanged, user, onSuccessSignIn } = this.props;
     stateChanged({ setUser, clearUser });
+
+    if (user) {
+      onSuccessSignIn();
+    }
+  }
+
+  componentDidUpdate() {
+    const { user, onSuccessSignIn } = this.props;
+
+    if (user) {
+      onSuccessSignIn();
+    }
   }
 
   public render() {
-    const { onRedirectClick, onRedirectToRestoreClick, error, accountRedirect, user } = this.props;
+    const { onRedirectClick, onRedirectToRestoreClick, error } = this.props;
 
     let errorMessage: string = '';
     if (typeof error === 'object') {
@@ -58,10 +69,6 @@ class SignInComponent extends React.Component<IProps> {
       } else {
         errorMessage = 'Адрес электронной почты плохо отформатирован';
       }
-    }
-
-    if (user) {
-      return <Redirect to={accountRedirect()} />;
     }
 
     return (

@@ -1,5 +1,4 @@
 import React from 'react';
-import { Redirect } from 'react-router-dom';
 import { autobind } from 'core-decorators';
 import { connect } from 'react-redux';
 
@@ -12,7 +11,7 @@ import { AuthorizationForm } from '../../components/index';
 interface IOwnProps {
   onRedirectClick: () => void;
   signUpUser: (object: {email: string, password: string}) => void;
-  accountRedirect: () => string;
+  onSuccessSignUp: () => void;
 }
 
 const mapDispatch = {
@@ -35,8 +34,24 @@ type IProps = IOwnProps & IStateProps;
 
 @autobind
 class SignUpComponent extends React.Component<IProps> {
+  componentDidMount() {
+    const { user, onSuccessSignUp } = this.props;
+
+    if (user) {
+      onSuccessSignUp();
+    }
+  }
+
+  componentDidUpdate() {
+    const { user, onSuccessSignUp } = this.props;
+
+    if (user) {
+      onSuccessSignUp();
+    }
+  }
+
   public render() {
-    const { onRedirectClick, error, accountRedirect, user } = this.props;
+    const { onRedirectClick, error } = this.props;
     let errorMessage: string = '';
     if (typeof error === 'object') {
       if (error.code === 'auth/invalid-email') {
@@ -44,10 +59,6 @@ class SignUpComponent extends React.Component<IProps> {
       } else if (error.code === 'auth/email-already-in-use') {
         errorMessage = 'Этот email адрес уже используется на другом аккаунте';
       }
-    }
-
-    if (user) {
-      return <Redirect to={accountRedirect()} />;
     }
 
     return (

@@ -19,17 +19,13 @@ function RestoreLayoutComponent(props: IProps) {
 
   return (
     <Layout>
-      <Restore accountRedirect={redirectToAccount} onRedirectClick={redirectToSignIn} />
+      <Restore onRedirectClick={redirectToSignIn} />
     </Layout>
   );
 
   function redirectToSignIn() {
     const { history } = props;
     history.push(routes.auth.signIn.getRedirectPath());
-  }
-
-  function redirectToAccount(): string {
-    return routes.auth.account.getRedirectPath();
   }
 }
 
