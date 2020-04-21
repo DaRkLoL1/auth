@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { IAppReduxState } from 'shared/types/app';
 
 import { actionCreators, selectors } from './../../../redux';
-import { AuthorizationForm } from '../../components/index';
+import { SignInForm } from '../../components/index';
 
 interface IOwnProps {
   onRedirectClick: () => void;
@@ -72,8 +72,7 @@ class SignInComponent extends React.Component<IProps> {
     }
 
     return (
-      <AuthorizationForm
-        type="signIn"
+      <SignInForm
         onRedirectClick={onRedirectClick}
         errorMessage={errorMessage}
         onRedirectToRestoreClick={onRedirectToRestoreClick}

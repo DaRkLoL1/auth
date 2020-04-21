@@ -2,9 +2,9 @@ import React from 'react';
 import block from 'bem-cn';
 import { autobind } from 'core-decorators';
 
-import { PasswordField } from '../PasswordField/PasswordField';
-import { Button } from '../Button/Button';
-import './AccountForm.scss';
+import { Button, PasswordField } from 'shared/view/elements';
+
+import '../auth-form/auth-form.scss';
 
 interface IProps {
   user: string;
@@ -16,7 +16,7 @@ interface IState {
   password: string;
 }
 
-const b = block('account-form');
+const b = block('auth-form');
 
 class AccountForm extends React.Component<IProps, IState> {
   state: IState = {
@@ -46,7 +46,7 @@ class AccountForm extends React.Component<IProps, IState> {
           <div className={b('button')}>
             <Button text="Изменить пароль" />
           </div>
-          <button className={b('exit')} type="button" onClick={() => handleSignOut()}>Выйти</button>
+          <button className={b('link')} type="button" onClick={() => handleSignOut()}>Выйти</button>
         </div>
       </form>
     );
