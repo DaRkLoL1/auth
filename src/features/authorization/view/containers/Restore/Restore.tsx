@@ -1,5 +1,4 @@
 import React from 'react';
-import { Redirect } from 'react-router-dom';
 import { autobind } from 'core-decorators';
 import { connect } from 'react-redux';
 
@@ -11,7 +10,6 @@ import { AuthorizationForm } from '../../components/index';
 interface IOwnProps {
   onRedirectClick: () => void;
   restore: (object: {email: string}) => void;
-  accountRedirect: () => string;
   clearMessage: () => void;
 }
 
@@ -23,13 +21,11 @@ const mapDispatch = {
 interface IStateProps {
   error: string | {code: string};
   sendMessage: boolean;
-  user: string;
 }
 
 function mapState(state: IAppReduxState): IStateProps {
   return {
     error: selectors.selectCommunication(state, 'restore').error,
-    user: selectors.selectUser(state),
     sendMessage: selectors.selectMessage(state),
   };
 }
@@ -53,7 +49,7 @@ class RestoreComponent extends React.Component<IProps> {
   }
 
   public render() {
-    const { onRedirectClick, error, accountRedirect, user, sendMessage } = this.props;
+    const { onRedirectClick, error, sendMessage } = this.props;
     let errorMessage: string = '';
 
     if (typeof error === 'object') {
@@ -68,10 +64,6 @@ class RestoreComponent extends React.Component<IProps> {
 
     if (sendMessage) {
       message = 'Письмо было отправлено';
-    }
-
-    if (user) {
-      return <Redirect to={accountRedirect()} />;
     }
 
     return (
