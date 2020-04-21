@@ -1,0 +1,125 @@
+.auth-form {
+  position: relative;
+  padding-top: 70px;
+  padding-bottom: 44px;
+  width: 100%;
+
+  &__wrapper {
+    margin: 0 auto;
+    width: 55%;
+
+    @media (max-width: 500px) {
+      width: 85%;
+    }
+
+    @media (max-width: 700px) {
+      width: 75%;
+    }
+  }
+
+  &__title {
+    text-align: center;
+  }
+
+  &__description {
+    margin-bottom: 41px;
+    padding: 0 22%;
+    color: #3c485e;
+    text-align: center;
+    font-size: 14px;
+    line-height: 22px;
+  }
+
+  &__error-title {
+    color: #e31e24;
+    text-align: center;
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  &__input {
+    padding-bottom: 11px;
+  }
+
+  &__lists {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0 6px;
+  }
+
+  &__list {
+    margin: 0;
+    margin-right: 16px;
+    padding-top: 3px;
+    padding-left: 20px;
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+
+  &__item {
+    color: #3c485e;
+    font-size: 9px;
+    line-height: 120%;
+  }
+
+  &__restore {
+    padding: 2px 0;
+    outline: none;
+    border: none;
+    background-color: transparent;
+    color: #5867dd;
+    font-size: 12px;
+    line-height: 20px;
+    cursor: pointer;
+
+    &:focus {
+      color: black;
+    }
+  }
+
+  &__button {
+    margin: 35px auto 14px;
+    width: 100%;
+  }
+
+  &__link {
+    margin: 27px 0 13px;
+    padding-right: 15px;
+    outline: none;
+    border: none;
+    background-color: transparent;
+    background-image: url('./image/arrow.png');
+    background-position: right 55%;
+    background-repeat: no-repeat;
+    color: #5867dd;
+    text-align: center;
+    font-size: 14px;
+    line-height: 22px;
+    cursor: pointer;
+
+    @media (min-width: 500px) {
+      position: absolute;
+      top: 20px;
+      right: 25px;
+      margin: 0;
+    }
+  }
+
+  &__text {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 21px;
+    padding: 0 23px;
+    color: #b3b9d1;
+    text-align: center;
+    font-size: 9px;
+    line-height: 150%;
+  }
+
+  &__consent {
+    color: #5867dd;
+    text-decoration: none;
+  }
+}

@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { IAppReduxState } from 'shared/types/app';
 
 import { actionCreators, selectors } from './../../../redux';
-import { AuthorizationForm } from '../../components/index';
+import { RestoreForm } from '../../components/index';
 
 interface IOwnProps {
   onRedirectClick: () => void;
@@ -67,8 +67,7 @@ class RestoreComponent extends React.Component<IProps> {
     }
 
     return (
-      <AuthorizationForm
-        type="restore"
+      <RestoreForm
         onRedirectClick={onRedirectClick}
         errorMessage={errorMessage}
         message={message}
