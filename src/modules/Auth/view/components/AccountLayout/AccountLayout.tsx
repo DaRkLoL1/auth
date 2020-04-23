@@ -1,5 +1,6 @@
 import React from 'react';
 import { History } from 'history';
+import { autobind } from 'core-decorators';
 
 import * as features from 'features';
 import { withAsyncFeatures } from 'core';
@@ -14,17 +15,21 @@ interface IFeatureProps {
 
 type IProps = IFeatureProps;
 
-function AccountLayoutComponent(props: IProps) {
-  const { authorizationFeatureEntry: { containers } } = props;
-  const { Account } = containers;
-  return (
-    <Layout>
-      <Account onLogOut={redirectToSignIn} />
-    </Layout>
-  );
+class AccountLayoutComponent extends React.Component<IProps> {
+  render() {
+    const { authorizationFeatureEntry: { containers } } = this.props;
+    const { Account } = containers;
 
-  function redirectToSignIn() {
-    const { history } = props;
+    return (
+      <Layout>
+        <Account onLogOut={this.redirectToSignIn} />
+      </Layout>
+    );
+  }
+
+  @autobind
+  redirectToSignIn() {
+    const { history } = this.props;
     history.push(routes.auth.signIn.getRedirectPath());
   }
 }

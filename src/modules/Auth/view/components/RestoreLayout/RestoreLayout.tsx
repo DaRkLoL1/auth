@@ -19,7 +19,6 @@ function RestoreLayoutComponent(props: IProps) {
       <Restore />
     </Layout>
   );
-
 }
 
 const RestoreLayout = withAsyncFeatures({
