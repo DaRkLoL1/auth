@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import block from 'bem-cn';
 import { autobind } from 'core-decorators';
 
@@ -58,7 +59,7 @@ class SignUpForm extends React.Component<IProps, IState> {
           <div className={b('button')}>
             <Button text="Зарегистрироваться" />
           </div>
-          <a href="signIn" className={b('link')}>Войти</a>
+          <Link to="signIn" className={b('link')}>Войти</Link>
           <p className={b('text')}>
             <span>
               Нажимая на кнопку &laquo;Зарегистрироваться&raquo;,

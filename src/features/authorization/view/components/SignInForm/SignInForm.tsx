@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import block from 'bem-cn';
 import { autobind } from 'core-decorators';
 
@@ -45,11 +46,11 @@ class SignInForm extends React.Component<IProps, IState> {
               onChange={this.changePassword}
             />
           </div>
-          <a href="restore" className={b('restore-link')}>Восстановить пароль</a>
+          <Link to="restore" className={b('restore-link')}>Восстановить пароль</Link>
           <div className={b('button')}>
             <Button text="Войти" />
           </div>
-          <a href="signUp" className={b('link')}>Зарегистрироваться</a>
+          <Link to="signUp" className={b('link')}>Зарегистрироваться</Link>
         </div>
       </form>
     );

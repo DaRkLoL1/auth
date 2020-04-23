@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import block from 'bem-cn';
 import { autobind } from 'core-decorators';
 
@@ -44,7 +45,7 @@ class RestoreForm extends React.Component<IProps, IState> {
           <div className={b('button')}>
             <Button text="Отправить новый пароль" />
           </div>
-          <a href="signIn" className={b('link')}>Войти</a>
+          <Link to="signIn" className={b('link')}>Войти</Link>
         </div>
       </form>
     );
