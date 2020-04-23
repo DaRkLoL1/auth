@@ -1,7 +1,9 @@
 import React from 'react';
-import { withAsyncFeatures } from 'core';
 import { History } from 'history';
+import { autobind } from 'core-decorators';
+
 import * as features from 'features';
+import { withAsyncFeatures } from 'core';
 
 import { Layout } from '../../../../shared/Layout/Layout';
 import { routes } from '../../../routes';
@@ -13,18 +15,21 @@ interface IFeatureProps {
 
 type IProps = IFeatureProps;
 
-function SignUpLayoutComponent(props: IProps) {
-  const { authorizationFeatureEntry: { containers } } = props;
-  const { SignUp } = containers;
+class SignUpLayoutComponent extends React.Component<IProps> {
+  render() {
+    const { authorizationFeatureEntry: { containers } } = this.props;
+    const { SignUp } = containers;
 
-  return (
-    <Layout>
-      <SignUp onSuccessSignUp={redirectToAccount} />
-    </Layout>
-  );
+    return (
+      <Layout>
+        <SignUp onSuccessSignUp={this.redirectToAccount} />
+      </Layout>
+    );
+  }
 
-  function redirectToAccount(): void {
-    const { history } = props;
+  @autobind
+  redirectToAccount(): void {
+    const { history } = this.props;
     history.push(routes.auth.account.getRedirectPath());
   }
 }
