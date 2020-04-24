@@ -52,6 +52,7 @@ class SignUpComponent extends React.Component<IProps> {
   public render() {
     const { error } = this.props;
     let errorMessage: string = '';
+
     if (typeof error === 'object') {
       if (error.code === 'auth/invalid-email') {
         errorMessage = 'Адрес электронной почты плохо отформатирован';

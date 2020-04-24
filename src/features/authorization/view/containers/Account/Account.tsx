@@ -45,6 +45,7 @@ class AccountComponent extends React.Component<IProps> {
 
   public render() {
     const { user } = this.props;
+
     return (
       <AccountForm
         user={user}

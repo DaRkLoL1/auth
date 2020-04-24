@@ -1,6 +1,7 @@
 import React from 'react';
-import { withAsyncFeatures } from 'core';
+
 import * as features from 'features';
+import { withAsyncFeatures } from 'core';
 
 import { Layout } from '../../../../shared/Layout/Layout';
 

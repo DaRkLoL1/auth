@@ -1,4 +1,5 @@
 import React from 'react';
+import { Form, Field } from 'react-final-form';
 import block from 'bem-cn';
 import { autobind } from 'core-decorators';
 
@@ -12,61 +13,55 @@ interface IProps {
   handleSignOut: () => void;
 }
 
-interface IState {
+type FormValues = {
   password: string;
-}
+};
 
 const b = block('auth-form');
 
-class AccountForm extends React.Component<IProps, IState> {
-  state: IState = {
-    password: '',
-  };
-
+class AccountForm extends React.Component<IProps> {
   render() {
     const { user, handleSignOut } = this.props;
-    const { password } = this.state;
 
     return (
-      <form onSubmit={this.onSybmit} className={b()}>
-        <div className={b('wrapper')}>
-          <h1 className={b('title')}>Аккаунт</h1>
-          <h2 className={b('title')}>
-            Вы вошли как
-            {' '}
-            {user}
-          </h2>
-          <div className={b('input')}>
-            <PasswordField
-              checkMinValue
-              value={password}
-              onChange={this.handleChangePassword}
-            />
-          </div>
-          <div className={b('button')}>
-            <Button text="Изменить пароль" />
-          </div>
-          <button className={b('link')} type="button" onClick={() => handleSignOut()}>Выйти</button>
-        </div>
-      </form>
+      <Form onSubmit={this.onSybmit}>
+        {({ handleSubmit }) => (
+          <form onSubmit={handleSubmit} className={b()}>
+            <div className={b('wrapper')}>
+              <h1 className={b('title')}>Аккаунт</h1>
+              <h2 className={b('title')}>
+                Вы вошли как
+                {' '}
+                {user}
+              </h2>
+              <div className={b('input')}>
+                <Field name="password">
+                  {({ input }) => (
+                    <PasswordField
+                      checkMinValue
+                      value={input.value}
+                      onChange={input.onChange}
+                    />
+                  )}
+                </Field>
+              </div>
+              <div className={b('button')}>
+                <Button text="Изменить пароль" />
+              </div>
+              <button className={b('link')} type="button" onClick={() => handleSignOut()}>Выйти</button>
+            </div>
+          </form>
+        )}
+      </Form>
     );
   }
 
   @autobind
-  private onSybmit(event: React.SyntheticEvent) {
-    event.preventDefault();
-
+  private onSybmit(values: FormValues) {
     const { handleResetPassword } = this.props;
-    const { password } = this.state;
+    const { password } = values;
 
     handleResetPassword(password);
-  }
-
-  @autobind
-  private handleChangePassword(value: string) {
-    this.setState({
-      password: value,
-    });
   }
 }
 

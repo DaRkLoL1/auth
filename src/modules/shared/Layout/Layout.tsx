@@ -11,6 +11,7 @@ interface IProps {
 
 const Layout = (props: IProps) => {
   const { children } = props;
+
   return (
     <div className={b()}>
       <main className={b('content')}>
