@@ -38,7 +38,7 @@ class EmailField extends React.Component<IProps, IState> {
           type="email"
           required
           placeholder="ivanova@mail.ru"
-          className={b('field', textError ? { 'with-error': true } : { 'with-error': false })}
+          className={b('field', { 'with-error': textError })}
           value={value}
           onChange={this.onHandleChange}
           onBlur={this.onBlur}
@@ -53,11 +53,12 @@ class EmailField extends React.Component<IProps, IState> {
   }
 
   onCheckValues(target: string): void {
+    const { checkEmail } = this.props;
+
     this.setState({
       textError: validators.makeRequired('Поле обязательно для заполнения')(target),
     });
 
-    const { checkEmail } = this.props;
     if (checkEmail) {
       if (target.length > 0) {
         this.setState({
@@ -68,10 +69,10 @@ class EmailField extends React.Component<IProps, IState> {
   }
 
   onHandleChange(event: React.ChangeEvent<HTMLInputElement>): void {
-    const target = event.target.value;
-    this.onCheckValues(target);
-
     const { onChange } = this.props;
+    const target = event.target.value;
+
+    this.onCheckValues(target);
     onChange(target);
   }
 }

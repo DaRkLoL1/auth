@@ -1,7 +1,8 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import block from 'bem-cn';
+import { Link } from 'react-router-dom';
 import { autobind } from 'core-decorators';
+import { Form, Field } from 'react-final-form';
 
 import { Button, EmailField, PasswordField } from 'shared/view/elements';
 
@@ -14,69 +15,60 @@ interface IProps {
   errorMessage: string;
 }
 
-interface IState {
+type FormValues = {
   email: string;
   password: string;
-}
+};
 
-class SignInForm extends React.Component<IProps, IState> {
-  public state: IState = {
-    email: '',
-    password: '',
-  };
-
+class SignInForm extends React.Component<IProps> {
   render() {
     const { errorMessage } = this.props;
-    const { email, password } = this.state;
 
     return (
-      <form className={b()} onSubmit={this.onSubmit}>
-        <div className={b('wrapper')}>
-          <h1 className={b('title')}>Войти</h1>
+      <Form onSubmit={this.onSubmit}>
+        {({ handleSubmit }) => (
+          <form className={b()} onSubmit={handleSubmit}>
+            <div className={b('wrapper')}>
+              <h1 className={b('title')}>Войти</h1>
 
-          {errorMessage && <h2 className={b('error-title')}>{errorMessage}</h2>}
+              {errorMessage && <h2 className={b('error-title')}>{errorMessage}</h2>}
 
-          <div className={b('input')}>
-            <EmailField checkEmail={false} value={email} onChange={this.changeEmail} />
-          </div>
-          <div className={b('input')}>
-            <PasswordField
-              checkMinValue={false}
-              value={password}
-              onChange={this.changePassword}
-            />
-          </div>
-          <Link to="restore" className={b('restore-link')}>Восстановить пароль</Link>
-          <div className={b('button')}>
-            <Button text="Войти" />
-          </div>
-          <Link to="signUp" className={b('link')}>Зарегистрироваться</Link>
-        </div>
-      </form>
+              <div className={b('input')}>
+                <Field name="email">
+                  {({ input }) => (
+                    <EmailField checkEmail={false} value={input.value} onChange={input.onChange} />
+                  )}
+                </Field>
+              </div>
+              <div className={b('input')}>
+                <Field name="password">
+                  {({ input }) => (
+                    <PasswordField
+                      checkMinValue={false}
+                      value={input.value}
+                      onChange={input.onChange}
+                    />
+                  )}
+                </Field>
+              </div>
+              <Link to="restore" className={b('restore-link')}>Восстановить пароль</Link>
+              <div className={b('button')}>
+                <Button text="Войти" />
+              </div>
+              <Link to="signUp" className={b('link')}>Зарегистрироваться</Link>
+            </div>
+          </form>
+        )}
+      </Form>
     );
   }
 
   @autobind
-  private onSubmit(event: React.SyntheticEvent) {
-    event.preventDefault();
+  private onSubmit(values: FormValues) {
     const { onClick } = this.props;
-    const { email, password } = this.state;
+    const { email, password } = values;
 
     onClick(email, password);
-  }
-
-  @autobind
-  private changeEmail(value: string) {
-    this.setState({
-      email: value,
-    });
-  }
-
-  @autobind
-  private changePassword(value: string) {
-    this.setState({
-      password: value,
-    });
   }
 }
 

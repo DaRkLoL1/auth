@@ -46,13 +46,13 @@ class PasswordField extends React.Component<IProps, IState> {
             type={type}
             required
             placeholder="* * * * * * * * *"
-            className={b('field', textError ? { 'with-error': true } : { 'with-error': false })}
+            className={b('field', { 'with-error': textError })}
             value={value}
             onChange={this.onHandleChange}
             onBlur={this.onBlur}
           />
           <button
-            className={b('button', textError ? { 'with-error': true } : { 'with-error': false }, isHidden ? { visibled: false } : { visibled: true })}
+            className={b('button', { 'with-error': textError }, { visibled: !isHidden })}
             type="button"
             onClick={this.onButtonClick}
           >
@@ -77,11 +77,12 @@ class PasswordField extends React.Component<IProps, IState> {
   }
 
   onCheckValues(target: string): void {
+    const { checkMinValue } = this.props;
+
     this.setState({
       textError: validators.makeRequired('Поле обязательно для заполнения')(target),
     });
 
-    const { checkMinValue } = this.props;
     if (checkMinValue) {
       if (target.length > 0) {
         this.setState({
@@ -92,10 +93,10 @@ class PasswordField extends React.Component<IProps, IState> {
   }
 
   onHandleChange(event: React.ChangeEvent<HTMLInputElement>): void {
-    const target = event.target.value;
-    this.onCheckValues(target);
-
     const { onChange } = this.props;
+    const target = event.target.value;
+
+    this.onCheckValues(target);
     onChange(target);
   }
 }

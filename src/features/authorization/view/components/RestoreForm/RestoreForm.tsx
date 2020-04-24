@@ -1,6 +1,7 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import block from 'bem-cn';
+import { Link } from 'react-router-dom';
+import { Form, Field } from 'react-final-form';
 import { autobind } from 'core-decorators';
 
 import { Button, EmailField } from 'shared/view/elements';
@@ -15,56 +16,51 @@ interface IProps {
   message: string;
 }
 
-interface IState {
+type FormValues = {
   email: string;
-}
+};
 
-class RestoreForm extends React.Component<IProps, IState> {
-  public state: IState = {
-    email: '',
-  };
-
+class RestoreForm extends React.Component<IProps> {
   render() {
     const { errorMessage, message } = this.props;
-    const { email } = this.state;
 
     return (
-      <form className={b()} onSubmit={this.onSubmit}>
-        <div className={b('wrapper')}>
-          <h1 className={b('title')}>Восстановить пароль</h1>
-          <p className={b('description')}>
-            Напомните нам вашу почту и мы пришлем новый пароль
-          </p>
+      <Form onSubmit={this.onSubmit}>
+        {({ handleSubmit }) => (
+          <form className={b()} onSubmit={handleSubmit}>
+            <div className={b('wrapper')}>
+              <h1 className={b('title')}>Восстановить пароль</h1>
+              <p className={b('description')}>
+                Напомните нам вашу почту и мы пришлем новый пароль
+              </p>
 
-          {errorMessage && <h2 className={b('error-title')}>{errorMessage}</h2>}
-          {message && <h2 className={b('title')}>{message}</h2>}
+              {errorMessage && <h2 className={b('error-title')}>{errorMessage}</h2>}
+              {message && <h2 className={b('title')}>{message}</h2>}
 
-          <div className={b('input')}>
-            <EmailField checkEmail value={email} onChange={this.changeEmail} />
-          </div>
-          <div className={b('button')}>
-            <Button text="Отправить новый пароль" />
-          </div>
-          <Link to="signIn" className={b('link')}>Войти</Link>
-        </div>
-      </form>
+              <div className={b('input')}>
+                <Field name="email">
+                  {({ input }) => (
+                    <EmailField checkEmail value={input.value} onChange={input.onChange} />
+                  )}
+                </Field>
+              </div>
+              <div className={b('button')}>
+                <Button text="Отправить новый пароль" />
+              </div>
+              <Link to="signIn" className={b('link')}>Войти</Link>
+            </div>
+          </form>
+        )}
+      </Form>
     );
   }
 
   @autobind
-  private onSubmit(event: React.SyntheticEvent) {
-    event.preventDefault();
+  private onSubmit(values: FormValues) {
     const { onClick } = this.props;
-    const { email } = this.state;
+    const { email } = values;
 
     onClick(email);
-  }
-
-  @autobind
-  private changeEmail(value: string) {
-    this.setState({
-      email: value,
-    });
   }
 }
 
